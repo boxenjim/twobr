@@ -14,6 +14,7 @@
 		9B8208111A894DF8007B1B80 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B8208101A894DF8007B1B80 /* Images.xcassets */; };
 		9B8208141A894DF8007B1B80 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B8208121A894DF8007B1B80 /* LaunchScreen.xib */; };
 		9B8208201A894DF8007B1B80 /* TwobrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B82081F1A894DF8007B1B80 /* TwobrTests.swift */; };
+		9B82082D1A8964BC007B1B80 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9B82082F1A8964BC007B1B80 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,10 @@
 		9B8208191A894DF8007B1B80 /* TwobrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TwobrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B82081E1A894DF8007B1B80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B82081F1A894DF8007B1B80 /* TwobrTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwobrTests.swift; sourceTree = "<group>"; };
+		9B8208291A8963ED007B1B80 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Main.strings"; sourceTree = "<group>"; };
+		9B82082A1A8963ED007B1B80 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		9B8208301A8964C2007B1B80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9B8208311A8964D1007B1B80 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Localizable.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +91,7 @@
 				9B8208121A894DF8007B1B80 /* LaunchScreen.xib */,
 				9B8208081A894DF8007B1B80 /* Twobr.xcdatamodeld */,
 				9B8208041A894DF8007B1B80 /* Supporting Files */,
+				9B82082F1A8964BC007B1B80 /* Localizable.strings */,
 			);
 			path = Twobr;
 			sourceTree = "<group>";
@@ -196,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B82080F1A894DF8007B1B80 /* Main.storyboard in Resources */,
+				9B82082D1A8964BC007B1B80 /* Localizable.strings in Resources */,
 				9B8208141A894DF8007B1B80 /* LaunchScreen.xib in Resources */,
 				9B8208111A894DF8007B1B80 /* Images.xcassets in Resources */,
 			);
@@ -244,6 +251,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				9B82080E1A894DF8007B1B80 /* Base */,
+				9B8208291A8963ED007B1B80 /* es-MX */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -252,8 +260,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				9B8208131A894DF8007B1B80 /* Base */,
+				9B82082A1A8963ED007B1B80 /* es-MX */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		9B82082F1A8964BC007B1B80 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9B8208301A8964C2007B1B80 /* Base */,
+				9B8208311A8964D1007B1B80 /* es-MX */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -411,6 +429,7 @@
 				9B8208251A894DF8007B1B80 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9B8208261A894DF8007B1B80 /* Build configuration list for PBXNativeTarget "TwobrTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +438,7 @@
 				9B8208281A894DF8007B1B80 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
