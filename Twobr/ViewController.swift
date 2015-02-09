@@ -14,9 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var webView: UIWebView!
     
     @IBAction func handleShowMyTweetsButtonTapped(sender: UIButton) {
-        let url = NSURL(string: "http://www.twitter.com/boxenjim")
-        let urlRequest = NSURLRequest(URL: url!)
-        webView.loadRequest(urlRequest)
+        reloadTweets()
     }
     
     @IBAction func handleTweetButtonTapped(sender: UIButton) {
@@ -29,9 +27,15 @@ class ViewController: UIViewController {
         }
     }
     
+    func reloadTweets() {
+        let url = NSURL(string: "http://www.twitter.com/boxenjim")
+        let urlRequest = NSURLRequest(URL: url!)
+        webView.loadRequest(urlRequest)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        reloadTweets()
     }
 
     override func didReceiveMemoryWarning() {
