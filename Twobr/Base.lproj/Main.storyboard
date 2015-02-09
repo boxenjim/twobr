@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,14 +17,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I finished the first project" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MCK-vb-WFr">
-                                <rect key="frame" x="205" y="20" width="190" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gqS-Sp-Yu2">
+                                <rect key="frame" x="0.0" y="96" width="600" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U3T-f5-Vxj">
+                                <rect key="frame" x="243" y="20" width="114" height="30"/>
+                                <state key="normal" title="Show my tweets">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="handleShowMyTweetsButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="unp-9j-O3a"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVd-P2-bT4">
-                                <rect key="frame" x="260" y="49" width="80" height="30"/>
+                                <rect key="frame" x="260" y="58" width="80" height="30"/>
                                 <state key="normal" title="Send Tweet">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -34,12 +42,25 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="GVd-P2-bT4" firstAttribute="top" secondItem="MCK-vb-WFr" secondAttribute="bottom" constant="8" id="6bG-By-lgO"/>
-                            <constraint firstAttribute="centerX" secondItem="MCK-vb-WFr" secondAttribute="centerX" id="Ai9-56-bsy"/>
-                            <constraint firstItem="MCK-vb-WFr" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Df3-4b-eO8"/>
+                            <constraint firstItem="gqS-Sp-Yu2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="AQ3-cQ-HuE"/>
                             <constraint firstAttribute="centerX" secondItem="GVd-P2-bT4" secondAttribute="centerX" id="FRd-aa-ihL"/>
+                            <constraint firstAttribute="centerX" secondItem="GVd-P2-bT4" secondAttribute="centerX" id="LHF-4A-NKt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gqS-Sp-Yu2" secondAttribute="trailing" constant="-16" id="MFU-yl-he9"/>
+                            <constraint firstItem="U3T-f5-Vxj" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="SGr-vw-c2P"/>
+                            <constraint firstItem="gqS-Sp-Yu2" firstAttribute="top" secondItem="GVd-P2-bT4" secondAttribute="bottom" constant="8" id="Xza-qi-7qF"/>
+                            <constraint firstAttribute="centerX" secondItem="U3T-f5-Vxj" secondAttribute="centerX" id="jVX-Rj-w2n"/>
+                            <constraint firstItem="GVd-P2-bT4" firstAttribute="top" secondItem="U3T-f5-Vxj" secondAttribute="bottom" constant="8" id="w2D-zR-2rc"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gqS-Sp-Yu2" secondAttribute="bottom" id="xeo-xi-6Dz"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="FRd-aa-ihL"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="gqS-Sp-Yu2" id="9Nf-M1-vX3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

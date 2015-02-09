@@ -11,6 +11,14 @@ import Social
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var webView: UIWebView!
+    
+    @IBAction func handleShowMyTweetsButtonTapped(sender: UIButton) {
+        let url = NSURL(string: "http://www.twitter.com/boxenjim")
+        let urlRequest = NSURLRequest(URL: url!)
+        webView.loadRequest(urlRequest)
+    }
+    
     @IBAction func handleTweetButtonTapped(sender: UIButton) {
         if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
             let tweetVC = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
