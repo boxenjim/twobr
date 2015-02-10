@@ -14,8 +14,7 @@ let defaultAvatarURL = NSURL(string: "https://abs.twimg.com/sticky/default_profi
 
 class ViewController: UITableViewController {
     
-    var parsedTweets = [ParsedTweet(tweetText: "job1", userName: "@boxenjim", createdAt: "2015-2-9 16:44:30 PST", userAvatarURL: defaultAvatarURL),
-                        ParsedTweet(tweetText: "job2", userName: "@boxenjim", createdAt: "2015-2-9 16:44:35 PST", userAvatarURL: defaultAvatarURL)]
+    var parsedTweets: [ParsedTweet] = []
     
     @IBAction func handleShowMyTweetsButtonTapped(sender: UIButton) {
         reloadTweets()
@@ -32,7 +31,6 @@ class ViewController: UITableViewController {
     }
     
     @IBAction func handleRefresh(sender : AnyObject?) {
-        parsedTweets.insert(ParsedTweet(tweetText: "new row", userName: "@refresh", createdAt: "2015-2-9 16:44:35 PST", userAvatarURL: defaultAvatarURL), atIndex: 0)
         reloadTweets()
         refreshControl!.endRefreshing()
     }
@@ -69,7 +67,25 @@ class ViewController: UITableViewController {
         if let dataValue = data {
             var parseError: NSError? = nil
             let jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(dataValue, options: NSJSONReadingOptions(0), error: &parseError)
-            println("JSON error: \(parseError)\nJSON response: \(jsonObject)")
+            if parseError != nil {
+                return
+            }
+            
+            if let jsonArray = jsonObject as? [[String:AnyObject]] {
+                self.parsedTweets.removeAll(keepCapacity: true)
+                for tweetDict in jsonArray {
+                    let parsedTweet = ParsedTweet()
+                    parsedTweet.tweetText = tweetDict["text"] as? String
+                    parsedTweet.createdAt = tweetDict["created_at"] as? String
+                    let userDict = tweetDict["user"] as NSDictionary
+                    parsedTweet.userName = userDict["name"] as? String
+                    parsedTweet.userAvatarURL = NSURL(string: userDict["profile_image_url"] as String!)
+                    self.parsedTweets.append(parsedTweet)
+                }
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.tableView.reloadData()
+                })
+            }
         } else {
             println("handleTwitterData recieved no data")
         }
@@ -100,9 +116,18 @@ class ViewController: UITableViewController {
         cell.tweetTextLabel.text = parsedTweet.tweetText
         cell.createdAtLabel.text = parsedTweet.createdAt
         if parsedTweet.userAvatarURL != nil {
-            if let imageData = NSData(contentsOfURL: parsedTweet.userAvatarURL!) {
-                cell.avatarImageView.image = UIImage(data: imageData)
-            }
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                if let imageData = NSData(contentsOfURL: parsedTweet.userAvatarURL!) {
+                    let avatarImage = UIImage(data: imageData)
+                    dispatch_async(dispatch_get_main_queue(), {
+                        if cell.userNameLabel.text == parsedTweet.userName {
+                            cell.avatarImageView.image = avatarImage
+                        } else {
+                            println("oops, wrong cell, never mind")
+                        }
+                    })
+                }
+            })
         }
         return cell
     }
