@@ -9,6 +9,7 @@
 import UIKit
 
 class ParsedTweet: NSObject {
+    var tweetID: String?
     var tweetText: String?
     var userName: String?
     var createdAt: String?
@@ -18,8 +19,9 @@ class ParsedTweet: NSObject {
         super.init()
     }
     
-    init(tweetText: String?, userName: String?, createdAt: String?, userAvatarURL: NSURL?) {
+    init(tweetID: String?, tweetText: String?, userName: String?, createdAt: String?, userAvatarURL: NSURL?) {
         super.init()
+        self.tweetID = tweetID
         self.tweetText = tweetText
         self.userName = userName
         self.createdAt = createdAt

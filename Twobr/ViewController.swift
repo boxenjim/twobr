@@ -14,10 +14,15 @@ let defaultAvatarURL = NSURL(string: "https://abs.twimg.com/sticky/default_profi
 
 class ViewController: UITableViewController {
     
-    var parsedTweets: [ParsedTweet] = []
+    var maxID: String? = nil
+    var sinceID: String? = nil
+    var count = 0
+    var matchedTweets: [ParsedTweet] = []
     
     @IBAction func handleShowMyTweetsButtonTapped(sender: UIButton) {
-        reloadTweets()
+        if count < 800 {
+            self.reloadTweets()
+        }
     }
     
     @IBAction func handleTweetButtonTapped(sender: UIButton) {
@@ -31,7 +36,9 @@ class ViewController: UITableViewController {
     }
     
     @IBAction func handleRefresh(sender : AnyObject?) {
-        reloadTweets()
+        if count < 800 {
+            self.reloadTweets()
+        }
         refreshControl!.endRefreshing()
     }
     
@@ -47,7 +54,13 @@ class ViewController: UITableViewController {
                 if twitterAccounts.count == 0 {
                     println("no twitter accounts configured")
                 } else {
-                    let twitterParams = ["count":"100"]
+                    var twitterParams = ["count":"200"]
+                    if self.maxID != nil && self.count < 800 {
+                        twitterParams["max_id"] = self.maxID
+                    } else if self.sinceID != nil {
+                        twitterParams["since_id"] = self.sinceID
+                    }
+                    
                     let twitterAPIURL = NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")
                     let request = SLRequest(forServiceType: SLServiceTypeTwitter,
                                             requestMethod: SLRequestMethod.GET,
@@ -72,19 +85,76 @@ class ViewController: UITableViewController {
             }
             
             if let jsonArray = jsonObject as? [[String:AnyObject]] {
-                self.parsedTweets.removeAll(keepCapacity: true)
                 for tweetDict in jsonArray {
-                    let parsedTweet = ParsedTweet()
-                    parsedTweet.tweetText = tweetDict["text"] as? String
-                    parsedTweet.createdAt = tweetDict["created_at"] as? String
-                    let userDict = tweetDict["user"] as NSDictionary
-                    parsedTweet.userName = userDict["name"] as? String
-                    parsedTweet.userAvatarURL = NSURL(string: userDict["profile_image_url"] as String!)
-                    self.parsedTweets.append(parsedTweet)
+                    //println("tweet: \(tweetDict)")
+                    //let keywords = ["open", "available", "fill", "work", "job", "hire", "hiring", "career", "look", "need", "position", "search", "find", "help", "grow", "join", "apply", "application", "full-time", "part-time", "full time", "part time", "contractor", "freelance"]
+                    let keywords = ["job", "career", "hire", "hiring", "need", "find", "looking", "part-time", "full-time", "part time", "full time", "position"]
+                    
+                    var score = 0
+                    let scoreToBeat = 1
+                    if let text = tweetDict["text"] as? String {
+                        for keyword in keywords {
+                            if text.lowercaseString.rangeOfString(keyword) != nil {
+                                score += 1
+                            }
+                            if score > scoreToBeat { break }
+                        }
+                    }
+                    
+                    if let retweetedStatus = tweetDict["retweeted_status"] as? [String:AnyObject] {
+                        if let entities = retweetedStatus["entities"] as? [String:AnyObject] {
+                            if let hashtags = entities["hashtags"] as? [[String:AnyObject]] {
+                                for hashtag in hashtags {
+                                    if let text = hashtag["text"] as? String {
+                                        for keyword in keywords {
+                                            if text.lowercaseString.rangeOfString(keyword) != nil {
+                                                score += 1
+                                            }
+                                            if score > scoreToBeat { break }
+                                        }
+                                    }
+                                }
+                            }
+                            if let urls = entities["urls"] as? [[String:AnyObject]] {
+                                for urlDict in urls {
+                                    if let url = urlDict["display_url"] as? String {
+                                        for keyword in keywords {
+                                            if url.lowercaseString.rangeOfString(keyword) != nil {
+                                                score += 1
+                                            }
+                                            if score > scoreToBeat { break }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    if score > scoreToBeat {
+                        let parsedTweet = ParsedTweet()
+                        parsedTweet.tweetID = tweetDict["id_str"] as? String
+                        parsedTweet.tweetText = tweetDict["text"] as? String
+                        parsedTweet.createdAt = tweetDict["created_at"] as? String
+                        let userDict = tweetDict["user"] as NSDictionary
+                        parsedTweet.userName = userDict["name"] as? String
+                        parsedTweet.userAvatarURL = NSURL(string: userDict["profile_image_url"] as String!)
+                        matchedTweets.append(parsedTweet)
+                    }
+                    
+                    self.count += 1
+                    if self.sinceID == nil {
+                        self.sinceID = tweetDict["id_str"] as? String
+                    }
+                    if self.count < 800 {
+                        self.maxID = tweetDict["id_str"] as? String
+                    }
                 }
                 dispatch_async(dispatch_get_main_queue(), {
                     self.tableView.reloadData()
                 })
+                println("count: \(self.count)")
+            } else {
+                println("json: \(jsonObject)")
             }
         } else {
             println("handleTwitterData recieved no data")
@@ -106,12 +176,12 @@ class ViewController: UITableViewController {
 
     // UITableViewDelegate UITableViewDataSource
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return parsedTweets.count
+        return matchedTweets.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ParsedTweetCell") as ParsedTweetCell
-        let parsedTweet = parsedTweets[indexPath.row]
+        let parsedTweet = matchedTweets[indexPath.row]
         cell.userNameLabel.text = parsedTweet.userName
         cell.tweetTextLabel.text = parsedTweet.tweetText
         cell.createdAtLabel.text = parsedTweet.createdAt
