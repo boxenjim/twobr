@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="q4f-ic-PG7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="yfq-HT-hfw">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--Jobs-->
         <scene sceneID="zfn-dh-53d">
             <objects>
-                <tableViewController storyboardIdentifier="RootViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="q4f-ic-PG7" customClass="RootViewController" customModule="Twobr" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="JobsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="q4f-ic-PG7" customClass="JobsViewController" customModule="Twobr" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" sectionHeaderHeight="22" sectionFooterHeight="22" id="OfM-JZ-d6P">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -63,6 +63,7 @@
                                     <outlet property="createdAtLabel" destination="ioK-Xk-mQg" id="sNz-Su-wq6"/>
                                     <outlet property="tweetTextLabel" destination="exr-PB-fia" id="dOO-ZO-tyZ"/>
                                     <outlet property="userNameLabel" destination="tRJ-xg-N4d" id="Jb8-50-NCf"/>
+                                    <segue destination="WOH-lL-KQZ" kind="show" identifier="showJobDetailsSegue" id="h3g-oI-bmV"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -71,8 +72,109 @@
                             <outlet property="delegate" destination="q4f-ic-PG7" id="4ij-77-LvK"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Jobs" id="bQL-jt-Q5a">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="CqB-8P-dcZ">
+                            <connections>
+                                <action selector="handleTweetButtonTapped:" destination="q4f-ic-PG7" id="HgG-TL-aPG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HXD-Wn-AxH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1531" y="451"/>
+        </scene>
+        <!--Job-->
+        <scene sceneID="eId-4c-jNp">
+            <objects>
+                <viewController storyboardIdentifier="JobDetailsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WOH-lL-KQZ" customClass="JobDetailsViewController" customModule="Twobr" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gOW-mu-dQl"/>
+                        <viewControllerLayoutGuide type="bottom" id="GUU-wn-x1u"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jbz-eX-Xnu">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3oR-sg-1Wb">
+                                <rect key="frame" x="16" y="72" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Iwt-KT-71U"/>
+                                    <constraint firstAttribute="width" constant="60" id="tKd-Zl-fbJ"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Real Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjr-vS-2bt">
+                                <rect key="frame" x="84" y="72" width="500" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N8T-hA-zyF">
+                                <rect key="frame" x="84" y="100" width="500" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet Text" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MEK-Q6-jyS">
+                                <rect key="frame" x="16" y="140" width="568" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="It7-N8-bQM">
+                                <rect key="frame" x="16" y="169" width="568" height="411"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="sjr-vS-2bt" firstAttribute="top" secondItem="3oR-sg-1Wb" secondAttribute="top" id="0Uf-Ux-6v2"/>
+                            <constraint firstItem="N8T-hA-zyF" firstAttribute="leading" secondItem="3oR-sg-1Wb" secondAttribute="trailing" constant="8" id="AIu-Rc-Kfj"/>
+                            <constraint firstItem="It7-N8-bQM" firstAttribute="top" secondItem="MEK-Q6-jyS" secondAttribute="bottom" constant="8" id="HCt-dY-hFZ"/>
+                            <constraint firstItem="N8T-hA-zyF" firstAttribute="top" secondItem="sjr-vS-2bt" secondAttribute="bottom" constant="8" id="IbN-r2-myU"/>
+                            <constraint firstItem="GUU-wn-x1u" firstAttribute="top" secondItem="It7-N8-bQM" secondAttribute="bottom" constant="20" id="MHw-wY-7s0"/>
+                            <constraint firstItem="sjr-vS-2bt" firstAttribute="trailing" secondItem="jbz-eX-Xnu" secondAttribute="trailingMargin" id="NfD-OJ-UL0"/>
+                            <constraint firstItem="MEK-Q6-jyS" firstAttribute="top" secondItem="3oR-sg-1Wb" secondAttribute="bottom" constant="8" id="bap-am-qfF"/>
+                            <constraint firstItem="3oR-sg-1Wb" firstAttribute="top" secondItem="gOW-mu-dQl" secondAttribute="bottom" constant="8" id="dnd-YW-oMv"/>
+                            <constraint firstItem="It7-N8-bQM" firstAttribute="trailing" secondItem="jbz-eX-Xnu" secondAttribute="trailingMargin" id="eU0-wM-mjR"/>
+                            <constraint firstItem="MEK-Q6-jyS" firstAttribute="trailing" secondItem="jbz-eX-Xnu" secondAttribute="trailingMargin" id="eeO-gM-mNI"/>
+                            <constraint firstItem="N8T-hA-zyF" firstAttribute="trailing" secondItem="jbz-eX-Xnu" secondAttribute="trailingMargin" id="kHk-Lg-p5n"/>
+                            <constraint firstItem="3oR-sg-1Wb" firstAttribute="leading" secondItem="jbz-eX-Xnu" secondAttribute="leadingMargin" id="nH5-dv-Cnu"/>
+                            <constraint firstItem="sjr-vS-2bt" firstAttribute="leading" secondItem="3oR-sg-1Wb" secondAttribute="trailing" constant="8" id="o68-hM-a2h"/>
+                            <constraint firstItem="It7-N8-bQM" firstAttribute="leading" secondItem="jbz-eX-Xnu" secondAttribute="leadingMargin" id="qe5-yA-O8n"/>
+                            <constraint firstItem="MEK-Q6-jyS" firstAttribute="leading" secondItem="jbz-eX-Xnu" secondAttribute="leadingMargin" id="zFX-aq-EXj"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Job" id="K0T-Mw-PdY"/>
+                    <connections>
+                        <outlet property="tweetImageView" destination="It7-N8-bQM" id="mLt-fC-JZA"/>
+                        <outlet property="tweetTextLabel" destination="MEK-Q6-jyS" id="W5L-Dd-5mg"/>
+                        <outlet property="userImageButton" destination="3oR-sg-1Wb" id="5wR-Q8-Ydb"/>
+                        <outlet property="userRealNameLabel" destination="sjr-vS-2bt" id="NxW-FN-kyI"/>
+                        <outlet property="userScreenNameLabel" destination="N8T-hA-zyF" id="DCq-1p-CWJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NlB-yT-nri" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2287" y="451"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3Fj-rM-dw5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yfq-HT-hfw" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8jA-xg-mqb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="q4f-ic-PG7" kind="relationship" relationship="rootViewController" id="Dnj-pH-cIJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="32b-kl-cqJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="719" y="451"/>
         </scene>

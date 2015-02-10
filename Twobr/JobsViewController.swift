@@ -12,23 +12,17 @@ import Accounts
 
 let defaultAvatarURL = NSURL(string: "https://abs.twimg.com/sticky/default_profile_images/default_profile_6_200x200.png")
 
-class RootViewController: UITableViewController, TwitterAPIRequestDelegate {
+class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
     
     var maxID: String? = nil
     var sinceID: String? = nil
     var count = 0
     var matchedTweets: [ParsedTweet] = []
     
-    @IBAction func handleShowMyTweetsButtonTapped(sender: UIButton) {
-        if count < 800 {
-            self.reloadTweets()
-        }
-    }
-    
-    @IBAction func handleTweetButtonTapped(sender: UIButton) {
+    @IBAction func handleTweetButtonTapped(sender: AnyObject) {
         if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
             let tweetVC = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-            tweetVC.setInitialText("I just finished the first project in iOS 8 SDK Development")
+            tweetVC.setInitialText("Hey tweoples, i'll looking for a new job, if you know of something give me a shout. #twobr")
             presentViewController(tweetVC, animated: true, completion: nil)
         } else {
             println("can't send tweet")
@@ -81,7 +75,7 @@ class RootViewController: UITableViewController, TwitterAPIRequestDelegate {
                 for tweetDict in jsonArray {
                     //println("tweet: \(tweetDict)")
                     //let keywords = ["open", "available", "fill", "work", "job", "hire", "hiring", "career", "look", "need", "position", "search", "find", "help", "grow", "join", "apply", "application", "full-time", "part-time", "full time", "part time", "contractor", "freelance"]
-                    let keywords = ["job", "career", "hire", "hiring", "need", "find", "looking", "part-time", "full-time", "part time", "full time", "position"]
+                    let keywords = ["job", "career", "hire", "hiring", "need", "find", "looking", "part-time", "full-time", "part time", "full time", "position", "twobr"]
                     
                     var score = 0
                     let scoreToBeat = 1
@@ -125,7 +119,7 @@ class RootViewController: UITableViewController, TwitterAPIRequestDelegate {
                     
                     if score > scoreToBeat {
                         let parsedTweet = ParsedTweet()
-                        parsedTweet.tweetID = tweetDict["id_str"] as? String
+                        parsedTweet.tweetIdString = tweetDict["id_str"] as? String
                         parsedTweet.tweetText = tweetDict["text"] as? String
                         parsedTweet.createdAt = tweetDict["created_at"] as? String
                         let userDict = tweetDict["user"] as NSDictionary
@@ -165,6 +159,16 @@ class RootViewController: UITableViewController, TwitterAPIRequestDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showJobDetailsSegue" {
+            let row = tableView!.indexPathForSelectedRow()!.row
+            let parsedTweet = matchedTweets[row] as ParsedTweet
+            if let jobDetailsVC = segue.destinationViewController as? JobDetailsViewController {
+                jobDetailsVC.tweetIdString = parsedTweet.tweetIdString
+            }
+        }
     }
 
     // UITableViewDelegate UITableViewDataSource
