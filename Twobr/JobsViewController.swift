@@ -14,9 +14,7 @@ let defaultAvatarURL = NSURL(string: "https://abs.twimg.com/sticky/default_profi
 
 class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
     
-    var maxID: String? = nil
     var sinceID: String? = nil
-    var count = 0
     var matchedTweets: [ParsedTweet] = []
     
     @IBAction func handleTweetButtonTapped(sender: AnyObject) {
@@ -30,9 +28,7 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
     }
     
     @IBAction func handleRefresh(sender : AnyObject?) {
-        if count < 800 {
-            self.reloadTweets()
-        }
+        self.reloadTweets()
         refreshControl!.endRefreshing()
     }
     
@@ -48,10 +44,8 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
                 if twitterAccounts.count == 0 {
                     println("no twitter accounts configured")
                 } else {
-                    var twitterParams = ["count":"200"]
-                    if self.maxID != nil && self.count < 800 {
-                        twitterParams["max_id"] = self.maxID
-                    } else if self.sinceID != nil {
+                    var twitterParams = ["count":"100"]
+                    if self.sinceID != nil {
                         twitterParams["since_id"] = self.sinceID
                     }
                     
@@ -71,78 +65,74 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
                 return
             }
             
-            if let jsonArray = jsonObject as? [[String:AnyObject]] {
-                for tweetDict in jsonArray {
-                    //println("tweet: \(tweetDict)")
-                    //let keywords = ["open", "available", "fill", "work", "job", "hire", "hiring", "career", "look", "need", "position", "search", "find", "help", "grow", "join", "apply", "application", "full-time", "part-time", "full time", "part time", "contractor", "freelance"]
-                    let keywords = ["job", "career", "hire", "hiring", "need", "find", "looking", "part-time", "full-time", "part time", "full time", "position", "twobr"]
-                    
-                    var score = 0
-                    let scoreToBeat = 1
-                    if let text = tweetDict["text"] as? String {
-                        for keyword in keywords {
-                            if text.lowercaseString.rangeOfString(keyword) != nil {
-                                score += 1
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+                if let jsonArray = jsonObject as? [[String:AnyObject]] {
+                    for tweetDict in jsonArray {
+                        //println("tweet: \(tweetDict)")
+                        //let keywords = ["open", "available", "fill", "work", "job", "hire", "hiring", "career", "look", "need", "position", "search", "find", "help", "grow", "join", "apply", "application", "full-time", "part-time", "full time", "part time", "contractor", "freelance"]
+                        let keywords = ["job", "career", "hire", "hiring", "need", "find", "looking", "part-time", "full-time", "part time", "full time", "position", "twobr"]
+                        
+                        var score = 0
+                        let scoreToBeat = 1
+                        if let text = tweetDict["text"] as? String {
+                            for keyword in keywords {
+                                if text.lowercaseString.rangeOfString(keyword) != nil {
+                                    score += 1
+                                }
+                                if score > scoreToBeat { break }
                             }
-                            if score > scoreToBeat { break }
                         }
-                    }
-                    
-                    if let retweetedStatus = tweetDict["retweeted_status"] as? [String:AnyObject] {
-                        if let entities = retweetedStatus["entities"] as? [String:AnyObject] {
-                            if let hashtags = entities["hashtags"] as? [[String:AnyObject]] {
-                                for hashtag in hashtags {
-                                    if let text = hashtag["text"] as? String {
-                                        for keyword in keywords {
-                                            if text.lowercaseString.rangeOfString(keyword) != nil {
-                                                score += 1
+                        
+                        if let retweetedStatus = tweetDict["retweeted_status"] as? [String:AnyObject] {
+                            if let entities = retweetedStatus["entities"] as? [String:AnyObject] {
+                                if let hashtags = entities["hashtags"] as? [[String:AnyObject]] {
+                                    for hashtag in hashtags {
+                                        if let text = hashtag["text"] as? String {
+                                            for keyword in keywords {
+                                                if text.lowercaseString.rangeOfString(keyword) != nil {
+                                                    score += 1
+                                                }
+                                                if score > scoreToBeat { break }
                                             }
-                                            if score > scoreToBeat { break }
+                                        }
+                                    }
+                                }
+                                if let urls = entities["urls"] as? [[String:AnyObject]] {
+                                    for urlDict in urls {
+                                        if let url = urlDict["display_url"] as? String {
+                                            for keyword in keywords {
+                                                if url.lowercaseString.rangeOfString(keyword) != nil {
+                                                    score += 1
+                                                }
+                                                if score > scoreToBeat { break }
+                                            }
                                         }
                                     }
                                 }
                             }
-                            if let urls = entities["urls"] as? [[String:AnyObject]] {
-                                for urlDict in urls {
-                                    if let url = urlDict["display_url"] as? String {
-                                        for keyword in keywords {
-                                            if url.lowercaseString.rangeOfString(keyword) != nil {
-                                                score += 1
-                                            }
-                                            if score > scoreToBeat { break }
-                                        }
-                                    }
-                                }
-                            }
+                        }
+                        
+                        if score > scoreToBeat {
+                            let parsedTweet = ParsedTweet()
+                            parsedTweet.tweetIdString = tweetDict["id_str"] as? String
+                            parsedTweet.tweetText = tweetDict["text"] as? String
+                            parsedTweet.createdAt = tweetDict["created_at"] as? String
+                            let userDict = tweetDict["user"] as NSDictionary
+                            parsedTweet.userName = userDict["name"] as? String
+                            parsedTweet.userAvatarURL = NSURL(string: userDict["profile_image_url"] as String!)
+                            self.matchedTweets.append(parsedTweet)
                         }
                     }
-                    
-                    if score > scoreToBeat {
-                        let parsedTweet = ParsedTweet()
-                        parsedTweet.tweetIdString = tweetDict["id_str"] as? String
-                        parsedTweet.tweetText = tweetDict["text"] as? String
-                        parsedTweet.createdAt = tweetDict["created_at"] as? String
-                        let userDict = tweetDict["user"] as NSDictionary
-                        parsedTweet.userName = userDict["name"] as? String
-                        parsedTweet.userAvatarURL = NSURL(string: userDict["profile_image_url"] as String!)
-                        matchedTweets.append(parsedTweet)
+                    if jsonArray.count > 0 {
+                        self.sinceID = jsonArray[0]["id_str"] as? String
                     }
-                    
-                    self.count += 1
-                    if self.sinceID == nil {
-                        self.sinceID = tweetDict["id_str"] as? String
-                    }
-                    if self.count < 800 {
-                        self.maxID = tweetDict["id_str"] as? String
-                    }
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.tableView.reloadData()
+                    })
+                } else {
+                    println("json: \(jsonObject)")
                 }
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.tableView.reloadData()
-                })
-                println("count: \(self.count)")
-            } else {
-                println("json: \(jsonObject)")
-            }
+            })
         } else {
             println("handleTwitterData recieved no data")
         }

@@ -138,11 +138,11 @@
 		9B8208031A894DF8007B1B80 /* Twobr */ = {
 			isa = PBXGroup;
 			children = (
+				9B8208061A894DF8007B1B80 /* AppDelegate.swift */,
 				9B8208371A896E0F007B1B80 /* Views */,
 				9B8208361A896E01007B1B80 /* Controllers */,
 				9B8208351A896DF4007B1B80 /* Models */,
 				9BE6403F1A8AA471001D121F /* Twitter */,
-				9B8208061A894DF8007B1B80 /* AppDelegate.swift */,
 				9B8208101A894DF8007B1B80 /* Images.xcassets */,
 				9B8208041A894DF8007B1B80 /* Supporting Files */,
 			);
