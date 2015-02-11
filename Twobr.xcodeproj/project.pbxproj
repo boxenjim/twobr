@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		9B14BF421A8AF8F000B9132B /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B14BF411A8AF8F000B9132B /* UserDetailViewController.swift */; };
 		9B158AB01A89748100EC1350 /* ParsedTweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B158AAF1A89748100EC1350 /* ParsedTweetCell.swift */; };
-		9B312D831A8BEB4F00702F7D /* Swifties.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B312D801A8BEB3500702F7D /* Swifties.framework */; };
-		9B312D871A8BEFB300702F7D /* Swifties.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B312D801A8BEB3500702F7D /* Swifties.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9B312DA01A8C10D500702F7D /* Swifties.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B312D9D1A8C10CA00702F7D /* Swifties.framework */; };
+		9B312DA11A8C10E200702F7D /* Swifties.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B312D9D1A8C10CA00702F7D /* Swifties.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9B312DA51A8C11A200702F7D /* TwobrDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B312DA41A8C11A200702F7D /* TwobrDataModel.swift */; };
 		9B8208071A894DF8007B1B80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8208061A894DF8007B1B80 /* AppDelegate.swift */; };
 		9B82080A1A894DF8007B1B80 /* Twobr.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9B8208081A894DF8007B1B80 /* Twobr.xcdatamodeld */; };
 		9B82080C1A894DF8007B1B80 /* JobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B82080B1A894DF8007B1B80 /* JobsViewController.swift */; };
@@ -25,16 +26,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9B312D7F1A8BEB3500702F7D /* PBXContainerItemProxy */ = {
+		9B312D9C1A8C10CA00702F7D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9B312D7A1A8BEB3500702F7D /* Swifties.xcodeproj */;
+			containerPortal = 9B312D971A8C10CA00702F7D /* Swifties.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 9B312D2B1A8BE9B300702F7D;
 			remoteInfo = Swifties;
 		};
-		9B312D811A8BEB3500702F7D /* PBXContainerItemProxy */ = {
+		9B312D9E1A8C10CA00702F7D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 9B312D7A1A8BEB3500702F7D /* Swifties.xcodeproj */;
+			containerPortal = 9B312D971A8C10CA00702F7D /* Swifties.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 9B312D361A8BE9B300702F7D;
 			remoteInfo = SwiftiesTests;
@@ -55,7 +56,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9B312D871A8BEFB300702F7D /* Swifties.framework in Embed Frameworks */,
+				9B312DA11A8C10E200702F7D /* Swifties.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -65,7 +66,8 @@
 /* Begin PBXFileReference section */
 		9B14BF411A8AF8F000B9132B /* UserDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
 		9B158AAF1A89748100EC1350 /* ParsedTweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsedTweetCell.swift; sourceTree = "<group>"; };
-		9B312D7A1A8BEB3500702F7D /* Swifties.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Swifties.xcodeproj; path = ../Swifties/Swifties.xcodeproj; sourceTree = "<group>"; };
+		9B312D971A8C10CA00702F7D /* Swifties.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Swifties.xcodeproj; path = ../Swifties/Swifties.xcodeproj; sourceTree = "<group>"; };
+		9B312DA41A8C11A200702F7D /* TwobrDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwobrDataModel.swift; sourceTree = "<group>"; };
 		9B8208011A894DF8007B1B80 /* Twobr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twobr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B8208051A894DF8007B1B80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B8208061A894DF8007B1B80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,7 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B312D831A8BEB4F00702F7D /* Swifties.framework in Frameworks */,
+				9B312DA01A8C10D500702F7D /* Swifties.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,11 +107,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9B312D7B1A8BEB3500702F7D /* Products */ = {
+		9B312D981A8C10CA00702F7D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9B312D801A8BEB3500702F7D /* Swifties.framework */,
-				9B312D821A8BEB3500702F7D /* SwiftiesTests.xctest */,
+				9B312D9D1A8C10CA00702F7D /* Swifties.framework */,
+				9B312D9F1A8C10CA00702F7D /* SwiftiesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -120,7 +122,7 @@
 				9B8208031A894DF8007B1B80 /* Twobr */,
 				9B82081C1A894DF8007B1B80 /* TwobrTests */,
 				9B8208021A894DF8007B1B80 /* Products */,
-				9B312D7A1A8BEB3500702F7D /* Swifties.xcodeproj */,
+				9B312D971A8C10CA00702F7D /* Swifties.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -177,6 +179,7 @@
 			children = (
 				9B8208381A896E42007B1B80 /* ParsedTweet.swift */,
 				9B8208081A894DF8007B1B80 /* Twobr.xcdatamodeld */,
+				9B312DA41A8C11A200702F7D /* TwobrDataModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -281,8 +284,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 9B312D7B1A8BEB3500702F7D /* Products */;
-					ProjectRef = 9B312D7A1A8BEB3500702F7D /* Swifties.xcodeproj */;
+					ProductGroup = 9B312D981A8C10CA00702F7D /* Products */;
+					ProjectRef = 9B312D971A8C10CA00702F7D /* Swifties.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -294,18 +297,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		9B312D801A8BEB3500702F7D /* Swifties.framework */ = {
+		9B312D9D1A8C10CA00702F7D /* Swifties.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Swifties.framework;
-			remoteRef = 9B312D7F1A8BEB3500702F7D /* PBXContainerItemProxy */;
+			remoteRef = 9B312D9C1A8C10CA00702F7D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		9B312D821A8BEB3500702F7D /* SwiftiesTests.xctest */ = {
+		9B312D9F1A8C10CA00702F7D /* SwiftiesTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = SwiftiesTests.xctest;
-			remoteRef = 9B312D811A8BEB3500702F7D /* PBXContainerItemProxy */;
+			remoteRef = 9B312D9E1A8C10CA00702F7D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -342,6 +345,7 @@
 				9B82083A1A89718D007B1B80 /* ParsedTweet.swift in Sources */,
 				9B82080C1A894DF8007B1B80 /* JobsViewController.swift in Sources */,
 				9BE640411A8AA494001D121F /* TwitterAPIRequest.swift in Sources */,
+				9B312DA51A8C11A200702F7D /* TwobrDataModel.swift in Sources */,
 				9B82080A1A894DF8007B1B80 /* Twobr.xcdatamodeld in Sources */,
 				9B8208071A894DF8007B1B80 /* AppDelegate.swift in Sources */,
 				9B158AB01A89748100EC1350 /* ParsedTweetCell.swift in Sources */,
@@ -480,6 +484,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/jschultz/Code/Swifties/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = Twobr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -491,6 +499,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/jschultz/Code/Swifties/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = Twobr/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
