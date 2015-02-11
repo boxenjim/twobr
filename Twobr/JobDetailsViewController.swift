@@ -15,6 +15,8 @@ class JobDetailsViewController: UIViewController, TwitterAPIRequestDelegate {
     @IBOutlet weak var tweetTextLabel: UILabel!
     @IBOutlet weak var tweetImageView: UIImageView!
     
+    @IBAction func unwindToJobDetailsVC(segue: UIStoryboardSegue?){}
+    
     var tweetIdString: String? {
         didSet {
             reloadJobDetails()
@@ -74,5 +76,13 @@ class JobDetailsViewController: UIViewController, TwitterAPIRequestDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         reloadJobDetails()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showUserDetailsSegue" {
+            if let userDetailVC = segue.destinationViewController as? UserDetailViewController {
+                userDetailVC.screenName = userScreenNameLabel.text
+            }
+        }
     }
 }

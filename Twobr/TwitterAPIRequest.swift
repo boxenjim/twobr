@@ -9,6 +9,7 @@
 import UIKit
 import Social
 import Accounts
+import Swifties
 
 class TwitterAPIRequest: NSObject {
     func sendTwitterRequest(requestURL: NSURL!, params: [String:String], delegate: TwitterAPIRequestDelegate?) {
@@ -24,10 +25,12 @@ class TwitterAPIRequest: NSObject {
                     println("no twitter accounts configured")
                     return
                 } else {
+                    UIApplication.sharedApplication().pushNetworkActivity()
                     let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: requestURL, parameters: params)
                     request.account = twitterAccounts.first as ACAccount
                     request.performRequestWithHandler({
                         (data: NSData!, urlResponse: NSHTTPURLResponse!, error: NSError!) -> Void in
+                        UIApplication.sharedApplication().popNetworkActivity()
                         delegate!.handleTwitterData(data, urlResponse: urlResponse, error: error, fromRequest: self)
                     })
                 }
