@@ -14,6 +14,7 @@ let defaultAvatarURL = NSURL(string: "https://abs.twimg.com/sticky/default_profi
 
 class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
     
+    var jobDetailsVC: JobDetailsViewController? = nil
     var sinceID: String? = nil
     var matchedTweets: [ParsedTweet] = []
     
@@ -70,7 +71,7 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
                     for tweetDict in jsonArray {
                         //println("tweet: \(tweetDict)")
                         //let keywords = ["open", "available", "fill", "work", "job", "hire", "hiring", "career", "look", "need", "position", "search", "find", "help", "grow", "join", "apply", "application", "full-time", "part-time", "full time", "part time", "contractor", "freelance"]
-                        let keywords = ["job", "career", "hire", "hiring", "need", "find", "looking", "part-time", "full-time", "part time", "full time", "position", "twobr"]
+                        let keywords = ["job", "career", "hire", "hiring", "find", "looking", "part-time", "full-time", "part time", "full time", "position", "twobr", "post"]
                         
                         var score = 0
                         let scoreToBeat = 1
@@ -138,8 +139,22 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
         }
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            self.clearsSelectionOnViewWillAppear = false
+            self.preferredContentSize = CGSize(width: 320.0, height: 600.0)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let split = self.splitViewController {
+            let controllers = split.viewControllers
+            self.jobDetailsVC = controllers[controllers.count-1].topViewController as? JobDetailsViewController
+        }
+        
         reloadTweets()
         var refresher = UIRefreshControl()
         refresher.addTarget(self, action: "handleRefresh:", forControlEvents: UIControlEvents.ValueChanged)
@@ -153,10 +168,12 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showJobDetailsSegue" {
-            let row = tableView!.indexPathForSelectedRow()!.row
-            let parsedTweet = matchedTweets[row] as ParsedTweet
-            if let jobDetailsVC = segue.destinationViewController as? JobDetailsViewController {
-                jobDetailsVC.tweetIdString = parsedTweet.tweetIdString
+            if let indexPath = self.tableView.indexPathForSelectedRow() {
+                let parsedTweet = matchedTweets[indexPath.row] as ParsedTweet
+                let controller = (segue.destinationViewController as UINavigationController).topViewController as JobDetailsViewController
+                controller.tweetIdString = parsedTweet.tweetIdString
+                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+                controller.navigationItem.leftItemsSupplementBackButton = true
             }
         }
     }
