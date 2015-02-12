@@ -73,7 +73,7 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
                     for tweetDict in jsonArray {
                         //println("tweet: \(tweetDict)")
                         //let keywords = ["open", "available", "fill", "work", "job", "hire", "hiring", "career", "look", "need", "position", "search", "find", "help", "grow", "join", "apply", "application", "full-time", "part-time", "full time", "part time", "contractor", "freelance"]
-                        let keywords = ["job", "career", "hire", "hiring", "find", "looking", "part-time", "full-time", "part time", "full time", "position", "twobr", "post"]
+                        let keywords = ["job", "career", "hire", "hiring", "find", "looking", "part-time", "full-time", "freelance", "part time", "full time", "position", "twobr", "post", "interview"]
                         
                         var score = 0
                         let scoreToBeat = 1
@@ -115,7 +115,8 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
                             }
                         }
                         
-//                        if score > scoreToBeat {
+                        //if score > scoreToBeat {
+                        if score >= 0 {
                             let parsedTweet = ParsedTweet()
                             parsedTweet.tweetIdString = tweetDict["id_str"] as? String
                             parsedTweet.tweetText = tweetDict["text"] as? String
@@ -124,7 +125,7 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
                             parsedTweet.userName = userDict["name"] as? String
                             parsedTweet.userAvatarURL = NSURL(string: userDict["profile_image_url"] as String!)
                             tempArray.append(parsedTweet)
-//                        }
+                        }
                     }
                     if tempArray.count > 0 {
                         self.sinceID = jsonArray[0]["id_str"] as? String
@@ -132,6 +133,9 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
                     }
                     dispatch_async(dispatch_get_main_queue(), {
                         self.tableView.reloadData()
+                        if self.matchedTweets.count == 0 {
+                            // no jobs need to tell the user
+                        }
                     })
                 } else {
                     println("json: \(jsonObject)")

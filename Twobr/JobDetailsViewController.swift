@@ -93,9 +93,8 @@ class JobDetailsViewController: UIViewController, TwitterAPIRequestDelegate {
                 userDetailVC.screenName = userScreenNameLabel.text
             }
         } else if segue.identifier == "showImageDetailSegue" {
-            if let imageDetailVC = segue.destinationViewController as? ImageDetailViewController {
-                imageDetailVC.imageURL = self.imageURL
-            }
+            let imageDetailVC = (segue.destinationViewController as UINavigationController).topViewController as ImageDetailViewController
+            imageDetailVC.imageURL = self.imageURL
         }
     }
 }

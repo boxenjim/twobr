@@ -35,11 +35,10 @@ class UserDetailViewController: UIViewController, TwitterAPIRequestDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showUserImageDetailSegue" {
-            if let imageDetailVC = segue.destinationViewController as? ImageDetailViewController {
-                var urlString = userImageURL!.absoluteString
-                urlString = urlString!.stringByReplacingOccurrencesOfString("_normal", withString: "")
-                imageDetailVC.imageURL = NSURL(string: urlString!)
-            }
+            let imageDetailVC = (segue.destinationViewController as UINavigationController).topViewController as ImageDetailViewController
+            var urlString = userImageURL!.absoluteString
+            urlString = urlString!.stringByReplacingOccurrencesOfString("_normal", withString: "")
+            imageDetailVC.imageURL = NSURL(string: urlString!)
         }
     }
     

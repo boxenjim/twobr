@@ -105,30 +105,48 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dZE-2p-hFs">
-                                <rect key="frame" x="160" y="160" width="280" height="280"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="280" id="xlf-Gx-5Qv"/>
                                     <constraint firstAttribute="width" constant="280" id="xrY-Eb-SMq"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="xlf-Gx-5Qv"/>
+                                        <exclude reference="xrY-Eb-SMq"/>
+                                    </mask>
+                                </variation>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXv-Rc-3Ma">
-                                <rect key="frame" x="282" y="550" width="37" height="30"/>
-                                <state key="normal" title="Done">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="yNe-Ca-GDr" kind="unwind" unwindAction="finishedViewingImageDetailVC:" id="Ycf-X4-4FR"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="gJU-vZ-CWy" firstAttribute="top" secondItem="eXv-Rc-3Ma" secondAttribute="bottom" constant="20" id="KFS-0X-4nz"/>
+                            <constraint firstItem="dZE-2p-hFs" firstAttribute="top" secondItem="26k-kX-MVU" secondAttribute="topMargin" id="0kI-cD-sWS"/>
+                            <constraint firstItem="gJU-vZ-CWy" firstAttribute="top" secondItem="dZE-2p-hFs" secondAttribute="bottom" id="2kk-1e-CAB"/>
+                            <constraint firstItem="dZE-2p-hFs" firstAttribute="top" secondItem="SCZ-j7-zwE" secondAttribute="bottom" constant="30" id="5ti-Qn-fHt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dZE-2p-hFs" secondAttribute="trailing" constant="34" id="OLI-wo-MPe"/>
+                            <constraint firstItem="dZE-2p-hFs" firstAttribute="leading" secondItem="26k-kX-MVU" secondAttribute="leadingMargin" constant="34" id="RKw-Cl-gJq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dZE-2p-hFs" secondAttribute="trailing" constant="-16" id="YQj-xL-eKL"/>
                             <constraint firstAttribute="centerY" secondItem="dZE-2p-hFs" secondAttribute="centerY" id="faH-mu-2ne"/>
                             <constraint firstAttribute="centerX" secondItem="dZE-2p-hFs" secondAttribute="centerX" id="kOf-98-06g"/>
-                            <constraint firstAttribute="centerX" secondItem="eXv-Rc-3Ma" secondAttribute="centerX" id="kg2-jy-LKQ"/>
+                            <constraint firstItem="dZE-2p-hFs" firstAttribute="leading" secondItem="26k-kX-MVU" secondAttribute="leadingMargin" constant="-16" id="koV-9e-E8T"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="5ti-Qn-fHt"/>
+                                <exclude reference="OLI-wo-MPe"/>
+                                <exclude reference="RKw-Cl-gJq"/>
+                                <exclude reference="faH-mu-2ne"/>
+                                <exclude reference="kOf-98-06g"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="TuL-mf-QBX">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="Ztu-Im-aUN">
+                            <connections>
+                                <segue destination="yNe-Ca-GDr" kind="unwind" unwindAction="finishedViewingImageDetailVC:" id="o6k-Md-l6W"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="dZE-2p-hFs" id="biA-U9-6Nd"/>
                     </connections>
@@ -136,7 +154,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9gc-3Q-HqI" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="yNe-Ca-GDr" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1931" y="2088"/>
+            <point key="canvasLocation" x="2743" y="2088"/>
         </scene>
         <!--User Detail View Controller-->
         <scene sceneID="fIc-UQ-dJN">
@@ -228,7 +246,7 @@
                 <exit id="tjh-u6-3wm" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="S1K-sU-X1s">
                     <connections>
-                        <segue destination="U46-jo-xjp" kind="presentation" identifier="showUserImageDetailSegue" id="GcV-bC-9jg"/>
+                        <segue destination="58R-mZ-gNS" kind="presentation" identifier="showUserImageDetailSegue" id="GcV-bC-9jg"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -316,7 +334,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NlB-yT-nri" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="OuC-ET-FYw">
                     <connections>
-                        <segue destination="U46-jo-xjp" kind="presentation" identifier="showImageDetailSegue" id="KGF-V3-iex"/>
+                        <segue destination="58R-mZ-gNS" kind="presentation" identifier="showImageDetailSegue" id="KGF-V3-iex"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -370,6 +388,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Es4-eh-TpR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="719" y="1281"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="31m-cQ-4IK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="58R-mZ-gNS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Go-cB-cOT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="U46-jo-xjp" kind="relationship" relationship="rootViewController" id="iNG-Ja-Uwc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OEU-u9-kjl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1931" y="2088"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
