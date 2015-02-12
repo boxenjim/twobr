@@ -17,7 +17,6 @@ class JobDetailsViewController: UIViewController, TwitterAPIRequestDelegate {
     
     var imageURL: NSURL? = nil
     
-    @IBAction func unwindToJobDetailsVC(segue: UIStoryboardSegue?){}
     @IBAction func finishedViewingImageDetailVC(segue: UIStoryboardSegue) {}
     
     var tweetIdString: String? {
