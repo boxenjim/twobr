@@ -63,11 +63,13 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
             var parseError: NSError? = nil
             let jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(dataValue, options: NSJSONReadingOptions(0), error: &parseError)
             if parseError != nil {
+                println("\(jsonObject)")
                 return
             }
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
                 if let jsonArray = jsonObject as? [[String:AnyObject]] {
+                    var tempArray: [ParsedTweet] = []
                     for tweetDict in jsonArray {
                         //println("tweet: \(tweetDict)")
                         //let keywords = ["open", "available", "fill", "work", "job", "hire", "hiring", "career", "look", "need", "position", "search", "find", "help", "grow", "join", "apply", "application", "full-time", "part-time", "full time", "part time", "contractor", "freelance"]
@@ -113,7 +115,7 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
                             }
                         }
                         
-                        if score > scoreToBeat {
+//                        if score > scoreToBeat {
                             let parsedTweet = ParsedTweet()
                             parsedTweet.tweetIdString = tweetDict["id_str"] as? String
                             parsedTweet.tweetText = tweetDict["text"] as? String
@@ -121,11 +123,12 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
                             let userDict = tweetDict["user"] as NSDictionary
                             parsedTweet.userName = userDict["name"] as? String
                             parsedTweet.userAvatarURL = NSURL(string: userDict["profile_image_url"] as String!)
-                            self.matchedTweets.append(parsedTweet)
-                        }
+                            tempArray.append(parsedTweet)
+//                        }
                     }
-                    if jsonArray.count > 0 {
+                    if tempArray.count > 0 {
                         self.sinceID = jsonArray[0]["id_str"] as? String
+                        self.matchedTweets[0..<0] = tempArray[0..<tempArray.count]
                     }
                     dispatch_async(dispatch_get_main_queue(), {
                         self.tableView.reloadData()

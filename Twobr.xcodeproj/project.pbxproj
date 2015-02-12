@@ -21,6 +21,7 @@
 		9B82082D1A8964BC007B1B80 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9B82082F1A8964BC007B1B80 /* Localizable.strings */; };
 		9B82083A1A89718D007B1B80 /* ParsedTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8208381A896E42007B1B80 /* ParsedTweet.swift */; };
 		9B8B69331A8C226900DE7954 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8B69321A8C226900DE7954 /* SplitViewController.swift */; };
+		9BB18AF41A8D1BE200FFD8FD /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB18AF31A8D1BE200FFD8FD /* ImageDetailViewController.swift */; };
 		9BE640411A8AA494001D121F /* TwitterAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE640401A8AA494001D121F /* TwitterAPIRequest.swift */; };
 		9BE640431A8AA4F5001D121F /* TwitterAPIRequestDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE640421A8AA4F5001D121F /* TwitterAPIRequestDelegate.swift */; };
 		9BE640451A8AAF13001D121F /* JobDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE640441A8AAF13001D121F /* JobDetailsViewController.swift */; };
@@ -85,6 +86,7 @@
 		9B8208311A8964D1007B1B80 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		9B8208381A896E42007B1B80 /* ParsedTweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsedTweet.swift; sourceTree = "<group>"; };
 		9B8B69321A8C226900DE7954 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
+		9BB18AF31A8D1BE200FFD8FD /* ImageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
 		9BE640401A8AA494001D121F /* TwitterAPIRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAPIRequest.swift; sourceTree = "<group>"; };
 		9BE640421A8AA4F5001D121F /* TwitterAPIRequestDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAPIRequestDelegate.swift; sourceTree = "<group>"; };
 		9BE640441A8AAF13001D121F /* JobDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobDetailsViewController.swift; sourceTree = "<group>"; };
@@ -189,10 +191,11 @@
 		9B8208361A896E01007B1B80 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9B8B69321A8C226900DE7954 /* SplitViewController.swift */,
 				9B82080B1A894DF8007B1B80 /* JobsViewController.swift */,
 				9BE640441A8AAF13001D121F /* JobDetailsViewController.swift */,
 				9B14BF411A8AF8F000B9132B /* UserDetailViewController.swift */,
-				9B8B69321A8C226900DE7954 /* SplitViewController.swift */,
+				9BB18AF31A8D1BE200FFD8FD /* ImageDetailViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				9B82080C1A894DF8007B1B80 /* JobsViewController.swift in Sources */,
 				9B8B69331A8C226900DE7954 /* SplitViewController.swift in Sources */,
 				9BE640411A8AA494001D121F /* TwitterAPIRequest.swift in Sources */,
+				9BB18AF41A8D1BE200FFD8FD /* ImageDetailViewController.swift in Sources */,
 				9B312DA51A8C11A200702F7D /* TwobrDataModel.swift in Sources */,
 				9B82080A1A894DF8007B1B80 /* Twobr.xcdatamodeld in Sources */,
 				9B8208071A894DF8007B1B80 /* AppDelegate.swift in Sources */,

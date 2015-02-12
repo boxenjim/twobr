@@ -16,6 +16,10 @@ class UserDetailViewController: UIViewController, TwitterAPIRequestDelegate {
     @IBOutlet weak var userDescriptionLabel: UILabel!
 
     var screenName: String?
+    var userImageURL: NSURL?
+    
+    @IBAction func unwindToUserDetailVC(segue: UIStoryboardSegue) {}
+    @IBAction func finishedViewingImageDetailVC(segue: UIStoryboardSegue) {}
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -25,13 +29,23 @@ class UserDetailViewController: UIViewController, TwitterAPIRequestDelegate {
         
         let twitterRequest = TwitterAPIRequest()
         let twitterParams = ["screen_name":screenName!]
-        let twitterAPIURL = NSURL(string: "http://api.twitter.com/1.1/users/show.json")
+        let twitterAPIURL = NSURL(string: "https://api.twitter.com/1.1/users/show.json")
         twitterRequest.sendTwitterRequest(twitterAPIURL, params: twitterParams, delegate: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showUserImageDetailSegue" {
+            if let imageDetailVC = segue.destinationViewController as? ImageDetailViewController {
+                var urlString = userImageURL!.absoluteString
+                urlString = urlString!.stringByReplacingOccurrencesOfString("_normal", withString: "")
+                imageDetailVC.imageURL = NSURL(string: urlString!)
+            }
+        }
     }
     
     func handleTwitterData(data: NSData!, urlResponse: NSHTTPURLResponse!, error: NSError!, fromRequest: TwitterAPIRequest!) {
         if let dataValue = data {
-            let jsonString = NSString(data: dataValue, encoding: NSUTF8StringEncoding)
+//            let jsonString = NSString(data: dataValue, encoding: NSUTF8StringEncoding)
             var parseError: NSError? = nil
             let jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(dataValue, options: NSJSONReadingOptions(0), error: &parseError)
             if parseError != nil {
@@ -43,8 +57,9 @@ class UserDetailViewController: UIViewController, TwitterAPIRequestDelegate {
                     self.userScreenNameLabel.text = tweetDict["screen_name"] as? NSString
                     self.userLocationLabel.text = tweetDict["location"] as? NSString
                     self.userDescriptionLabel.text = tweetDict["description"] as? NSString
-                    if let userImageURL = NSURL(string: tweetDict["profile_image_url"] as NSString) {
-                        if let userImageData = NSData(contentsOfURL: userImageURL) {
+                    self.userImageURL = NSURL(string: tweetDict["profile_image_url"] as NSString!)
+                    if self.userImageURL != nil {
+                        if let userImageData = NSData(contentsOfURL: self.userImageURL!) {
                             self.userImageView.image = UIImage(data: userImageData)
                         }
                     }

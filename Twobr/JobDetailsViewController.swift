@@ -15,7 +15,10 @@ class JobDetailsViewController: UIViewController, TwitterAPIRequestDelegate {
     @IBOutlet weak var tweetTextLabel: UILabel!
     @IBOutlet weak var tweetImageView: UIImageView!
     
+    var imageURL: NSURL? = nil
+    
     @IBAction func unwindToJobDetailsVC(segue: UIStoryboardSegue?){}
+    @IBAction func finishedViewingImageDetailVC(segue: UIStoryboardSegue) {}
     
     var tweetIdString: String? {
         didSet {
@@ -58,10 +61,16 @@ class JobDetailsViewController: UIViewController, TwitterAPIRequestDelegate {
                     if let entities = tweetDict["entities"] as? NSDictionary {
                         if let media = entities["media"] as? NSArray {
                             if let mediaString = media[0]["media_url"] as? String {
-                                if let mediaURL = NSURL(string: mediaString) {
-                                    if let mediaData = NSData(contentsOfURL: mediaURL) {
+                                self.imageURL = NSURL(string: mediaString)
+                                if self.imageURL != nil {
+                                    if let mediaData = NSData(contentsOfURL: self.imageURL!) {
                                         self.tweetImageView.image = UIImage(data: mediaData)
+                                        self.tweetImageView.userInteractionEnabled = true
+                                    } else {
+                                        self.tweetImageView.userInteractionEnabled = false
                                     }
+                                } else {
+                                    self.tweetImageView.userInteractionEnabled = false
                                 }
                             }
                         }
@@ -82,6 +91,10 @@ class JobDetailsViewController: UIViewController, TwitterAPIRequestDelegate {
         if segue.identifier == "showUserDetailsSegue" {
             if let userDetailVC = segue.destinationViewController as? UserDetailViewController {
                 userDetailVC.screenName = userScreenNameLabel.text
+            }
+        } else if segue.identifier == "showImageDetailSegue" {
+            if let imageDetailVC = segue.destinationViewController as? ImageDetailViewController {
+                imageDetailVC.imageURL = self.imageURL
             }
         }
     }

@@ -84,6 +84,52 @@
             </objects>
             <point key="canvasLocation" x="1531" y="451"/>
         </scene>
+        <!--Image Detail View Controller-->
+        <scene sceneID="sW2-Ge-4zW">
+            <objects>
+                <viewController storyboardIdentifier="ImageDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="U46-jo-xjp" customClass="ImageDetailViewController" customModule="Twobr" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SCZ-j7-zwE"/>
+                        <viewControllerLayoutGuide type="bottom" id="gJU-vZ-CWy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="26k-kX-MVU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dZE-2p-hFs">
+                                <rect key="frame" x="160" y="160" width="280" height="280"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="280" id="xlf-Gx-5Qv"/>
+                                    <constraint firstAttribute="width" constant="280" id="xrY-Eb-SMq"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXv-Rc-3Ma">
+                                <rect key="frame" x="282" y="550" width="37" height="30"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="yNe-Ca-GDr" kind="unwind" unwindAction="finishedViewingImageDetailVC:" id="Ycf-X4-4FR"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gJU-vZ-CWy" firstAttribute="top" secondItem="eXv-Rc-3Ma" secondAttribute="bottom" constant="20" id="KFS-0X-4nz"/>
+                            <constraint firstAttribute="centerY" secondItem="dZE-2p-hFs" secondAttribute="centerY" id="faH-mu-2ne"/>
+                            <constraint firstAttribute="centerX" secondItem="dZE-2p-hFs" secondAttribute="centerX" id="kOf-98-06g"/>
+                            <constraint firstAttribute="centerX" secondItem="eXv-Rc-3Ma" secondAttribute="centerX" id="kg2-jy-LKQ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="dZE-2p-hFs" id="biA-U9-6Nd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9gc-3Q-HqI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="yNe-Ca-GDr" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1931" y="2088"/>
+        </scene>
         <!--User Detail View Controller-->
         <scene sceneID="fIc-UQ-dJN">
             <objects>
@@ -96,12 +142,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1LB-JR-S5Z">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1LB-JR-S5Z">
                                 <rect key="frame" x="250" y="28" width="100" height="100"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="da0-OP-Oui"/>
                                     <constraint firstAttribute="height" constant="100" id="oy0-4a-YJr"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="S1K-sU-X1s" appends="YES" id="F8o-Xo-Tg1"/>
+                                </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kC9-Ah-Pcj">
                                 <rect key="frame" x="16" y="136" width="568" height="29"/>
@@ -168,6 +218,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dHX-af-JPj" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="tjh-u6-3wm" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="S1K-sU-X1s">
+                    <connections>
+                        <segue destination="U46-jo-xjp" kind="presentation" identifier="showUserImageDetailSegue" id="GcV-bC-9jg"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2343" y="1281"/>
         </scene>
@@ -216,6 +271,10 @@
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="It7-N8-bQM">
                                 <rect key="frame" x="16" y="169" width="568" height="411"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="OuC-ET-FYw" appends="YES" id="qkM-tf-wlE"/>
+                                </connections>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -247,6 +306,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NlB-yT-nri" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="OuC-ET-FYw">
+                    <connections>
+                        <segue destination="U46-jo-xjp" kind="presentation" identifier="showImageDetailSegue" id="KGF-V3-iex"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1531" y="1281"/>
         </scene>
@@ -302,5 +366,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="O91-tN-Yr3"/>
+        <segue reference="KGF-V3-iex"/>
     </inferredMetricsTieBreakers>
 </document>
