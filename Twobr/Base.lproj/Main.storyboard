@@ -9,37 +9,37 @@
         <scene sceneID="zfn-dh-53d">
             <objects>
                 <tableViewController storyboardIdentifier="JobsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="q4f-ic-PG7" customClass="JobsViewController" customModule="Twobr" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" sectionHeaderHeight="22" sectionFooterHeight="22" id="OfM-JZ-d6P">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" id="OfM-JZ-d6P">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ParsedTweetCell" rowHeight="125" id="kWD-EH-jW8" customClass="ParsedTweetCell" customModule="Twobr" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ParsedTweetCell" rowHeight="100" id="kWD-EH-jW8" customClass="ParsedTweetCell" customModule="Twobr" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kWD-EH-jW8" id="GmU-H8-pAY">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="d9h-DM-Cn1">
-                                            <rect key="frame" x="8" y="8" width="75" height="75"/>
+                                            <rect key="frame" x="8" y="8" width="50" height="50"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="75" id="fLa-YO-6Q8"/>
-                                                <constraint firstAttribute="height" constant="75" id="h84-Oo-sl1"/>
+                                                <constraint firstAttribute="width" constant="50" id="fLa-YO-6Q8"/>
+                                                <constraint firstAttribute="height" constant="50" id="h84-Oo-sl1"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRJ-xg-N4d">
-                                            <rect key="frame" x="91" y="8" width="501" height="21"/>
+                                            <rect key="frame" x="66" y="8" width="426" height="21"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exr-PB-fia">
-                                            <rect key="frame" x="91" y="36" width="501" height="17"/>
+                                            <rect key="frame" x="66" y="37" width="526" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ioK-Xk-mQg">
-                                            <rect key="frame" x="286" y="103" width="29" height="14"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ioK-Xk-mQg">
+                                            <rect key="frame" x="563" y="12" width="29" height="14"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -54,9 +54,17 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="ioK-Xk-mQg" secondAttribute="bottom" id="XgK-NP-8G4"/>
                                         <constraint firstAttribute="centerX" secondItem="ioK-Xk-mQg" secondAttribute="centerX" id="Xyg-Hp-fYf"/>
                                         <constraint firstItem="tRJ-xg-N4d" firstAttribute="top" secondItem="GmU-H8-pAY" secondAttribute="topMargin" id="boD-LJ-E8n"/>
+                                        <constraint firstItem="ioK-Xk-mQg" firstAttribute="centerY" secondItem="tRJ-xg-N4d" secondAttribute="centerY" constant="0.5" id="gks-4T-WhU"/>
+                                        <constraint firstItem="ioK-Xk-mQg" firstAttribute="trailing" secondItem="GmU-H8-pAY" secondAttribute="trailingMargin" id="nhL-cC-Icn"/>
                                         <constraint firstItem="exr-PB-fia" firstAttribute="leading" secondItem="d9h-DM-Cn1" secondAttribute="trailing" constant="8" id="qeO-7C-Ydp"/>
-                                        <constraint firstItem="tRJ-xg-N4d" firstAttribute="trailing" secondItem="GmU-H8-pAY" secondAttribute="trailingMargin" id="tKr-fW-r7V"/>
+                                        <constraint firstItem="tRJ-xg-N4d" firstAttribute="trailing" secondItem="GmU-H8-pAY" secondAttribute="trailingMargin" constant="-100" id="tKr-fW-r7V"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="XgK-NP-8G4"/>
+                                            <exclude reference="Xyg-Hp-fYf"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="avatarImageView" destination="d9h-DM-Cn1" id="bFV-U5-S9X"/>

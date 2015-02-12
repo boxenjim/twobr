@@ -191,7 +191,16 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
         let parsedTweet = matchedTweets[indexPath.row]
         cell.userNameLabel.text = parsedTweet.userName
         cell.tweetTextLabel.text = parsedTweet.tweetText
-        cell.createdAtLabel.text = parsedTweet.createdAt
+        
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "E MMM dd HH:mm:ss Z yyyy"
+        let date = formatter.dateFromString(parsedTweet.createdAt!)
+        let compsFormatter = NSDateComponentsFormatter()
+        compsFormatter.maximumUnitCount = 1
+        compsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyle.Abbreviated
+        let comps = NSCalendar.currentCalendar().components(NSCalendarUnit.DayCalendarUnit | NSCalendarUnit.HourCalendarUnit | NSCalendarUnit.MinuteCalendarUnit | NSCalendarUnit.SecondCalendarUnit, fromDate: date!, toDate: NSDate(), options: NSCalendarOptions.allZeros)
+        cell.createdAtLabel.text = compsFormatter.stringFromDateComponents(comps)
+        
         if parsedTweet.userAvatarURL != nil {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                 if let imageData = NSData(contentsOfURL: parsedTweet.userAvatarURL!) {
