@@ -268,15 +268,25 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="edQ-o0-acV" kind="show" identifier="showUserDetailsSegue" id="2xl-g8-H2e"/>
+                                    <segue destination="58R-mZ-gNS" kind="presentation" identifier="showUserImageSegue" id="ob8-2A-irX"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Real Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjr-vS-2bt">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Real Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjr-vS-2bt">
                                 <rect key="frame" x="84" y="72" width="500" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mnV-FZ-JSd">
+                                <rect key="frame" x="84" y="72" width="500" height="33"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <state key="normal" title="Real Name">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="edQ-o0-acV" kind="show" identifier="showUserDetailsSegue" id="ewF-9z-oIK"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N8T-hA-zyF">
                                 <rect key="frame" x="84" y="100" width="500" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -290,7 +300,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="It7-N8-bQM">
-                                <rect key="frame" x="16" y="169" width="568" height="411"/>
+                                <rect key="frame" x="16" y="168" width="568" height="412"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="OuC-ET-FYw" appends="YES" id="qkM-tf-wlE"/>
@@ -300,11 +310,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="sjr-vS-2bt" firstAttribute="top" secondItem="3oR-sg-1Wb" secondAttribute="top" id="0Uf-Ux-6v2"/>
+                            <constraint firstItem="3oR-sg-1Wb" firstAttribute="top" secondItem="mnV-FZ-JSd" secondAttribute="top" id="7UH-58-buH"/>
+                            <constraint firstItem="mnV-FZ-JSd" firstAttribute="leading" secondItem="3oR-sg-1Wb" secondAttribute="trailing" constant="8" id="94O-nf-PTQ"/>
                             <constraint firstItem="N8T-hA-zyF" firstAttribute="leading" secondItem="3oR-sg-1Wb" secondAttribute="trailing" constant="8" id="AIu-Rc-Kfj"/>
                             <constraint firstItem="It7-N8-bQM" firstAttribute="top" secondItem="MEK-Q6-jyS" secondAttribute="bottom" constant="8" id="HCt-dY-hFZ"/>
                             <constraint firstItem="N8T-hA-zyF" firstAttribute="top" secondItem="sjr-vS-2bt" secondAttribute="bottom" constant="8" id="IbN-r2-myU"/>
                             <constraint firstItem="GUU-wn-x1u" firstAttribute="top" secondItem="It7-N8-bQM" secondAttribute="bottom" constant="20" id="MHw-wY-7s0"/>
                             <constraint firstItem="sjr-vS-2bt" firstAttribute="trailing" secondItem="jbz-eX-Xnu" secondAttribute="trailingMargin" id="NfD-OJ-UL0"/>
+                            <constraint firstItem="mnV-FZ-JSd" firstAttribute="trailing" secondItem="jbz-eX-Xnu" secondAttribute="trailingMargin" id="awg-qM-qCs"/>
                             <constraint firstItem="MEK-Q6-jyS" firstAttribute="top" secondItem="3oR-sg-1Wb" secondAttribute="bottom" constant="8" id="bap-am-qfF"/>
                             <constraint firstItem="3oR-sg-1Wb" firstAttribute="top" secondItem="gOW-mu-dQl" secondAttribute="bottom" constant="8" id="dnd-YW-oMv"/>
                             <constraint firstItem="It7-N8-bQM" firstAttribute="trailing" secondItem="jbz-eX-Xnu" secondAttribute="trailingMargin" id="eU0-wM-mjR"/>
@@ -321,6 +334,7 @@
                         <outlet property="tweetImageView" destination="It7-N8-bQM" id="mLt-fC-JZA"/>
                         <outlet property="tweetTextLabel" destination="MEK-Q6-jyS" id="W5L-Dd-5mg"/>
                         <outlet property="userImageButton" destination="3oR-sg-1Wb" id="5wR-Q8-Ydb"/>
+                        <outlet property="userRealNameButton" destination="mnV-FZ-JSd" id="Zx4-fE-oOK"/>
                         <outlet property="userRealNameLabel" destination="sjr-vS-2bt" id="NxW-FN-kyI"/>
                         <outlet property="userScreenNameLabel" destination="N8T-hA-zyF" id="DCq-1p-CWJ"/>
                     </connections>
@@ -404,6 +418,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="O91-tN-Yr3"/>
-        <segue reference="GcV-bC-9jg"/>
+        <segue reference="ob8-2A-irX"/>
     </inferredMetricsTieBreakers>
 </document>

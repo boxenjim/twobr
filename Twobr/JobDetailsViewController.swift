@@ -10,12 +10,14 @@ import UIKit
 
 class JobDetailsViewController: UIViewController, TwitterAPIRequestDelegate {
     @IBOutlet weak var userImageButton: UIButton!
+    @IBOutlet weak var userRealNameButton: UIButton!
     @IBOutlet weak var userRealNameLabel: UILabel!
     @IBOutlet weak var userScreenNameLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
     @IBOutlet weak var tweetImageView: UIImageView!
     
     var imageURL: NSURL? = nil
+    var userImageURL: NSURL?
     
     @IBAction func finishedViewingImageDetailVC(segue: UIStoryboardSegue) {}
     
@@ -47,14 +49,15 @@ class JobDetailsViewController: UIViewController, TwitterAPIRequestDelegate {
             if let tweetDict = jsonObject as? [String:AnyObject] {
                 dispatch_async(dispatch_get_main_queue(), {
                     let userDict = tweetDict["user"] as NSDictionary
-                    self.userRealNameLabel.text = userDict["name"] as? String
+                    //self.userRealNameLabel.text = userDict["name"] as? String
+                    let userRealName = userDict["name"] as? String
+                    self.userRealNameButton.setTitle(userRealName, forState: UIControlState.Normal)
                     self.userScreenNameLabel.text = userDict["screen_name"] as? String
                     self.tweetTextLabel.text = tweetDict["text"] as? String
-                    let userImageURL = NSURL(string: userDict["profile_image_url"] as String!)
-                    self.userImageButton.setTitle(nil, forState: UIControlState.Normal)
-                    if userImageURL != nil {
-                        if let imageData = NSData(contentsOfURL: userImageURL!) {
-                            self.userImageButton.setImage(UIImage(data: imageData), forState: UIControlState.Normal)
+                    self.userImageURL = NSURL(string: tweetDict["profile_image_url"] as NSString!)
+                    if self.userImageURL != nil {
+                        if let userImageData = NSData(contentsOfURL: self.userImageURL!) {
+                            self.userImageButton.setImage(UIImage(data: userImageData), forState: UIControlState.Normal)
                         }
                     }
                     if let entities = tweetDict["entities"] as? NSDictionary {
@@ -94,6 +97,11 @@ class JobDetailsViewController: UIViewController, TwitterAPIRequestDelegate {
         } else if segue.identifier == "showImageDetailSegue" {
             let imageDetailVC = (segue.destinationViewController as UINavigationController).topViewController as ImageDetailViewController
             imageDetailVC.imageURL = self.imageURL
+        } else if segue.identifier == "showUserImageSegue" {
+            let imageDetailVC = (segue.destinationViewController as UINavigationController).topViewController as ImageDetailViewController
+            var urlString = userImageURL!.absoluteString
+            urlString = urlString!.stringByReplacingOccurrencesOfString("_normal", withString: "")
+            imageDetailVC.imageURL = NSURL(string: urlString!)
         }
     }
 }
