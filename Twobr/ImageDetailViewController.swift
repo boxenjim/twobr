@@ -23,6 +23,10 @@ class ImageDetailViewController: UIViewController {
         }
     }
     
+    @IBAction func handleDoubleTapGesture(sender: UITapGestureRecognizer) {
+        imageView.transform = CGAffineTransformIdentity
+    }
+    
     var preGestureTransform: CGAffineTransform?
     var imageURL: NSURL? = nil
     

@@ -119,6 +119,7 @@
                                 </variation>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="CdL-bL-kJk" appends="YES" id="kRv-Oo-nBv"/>
+                                    <outletCollection property="gestureRecognizers" destination="JGm-0H-DEA" appends="YES" id="W0T-Aw-iLf"/>
                                 </connections>
                             </imageView>
                         </subviews>
@@ -162,6 +163,11 @@
                         <action selector="handlePanGesture:" destination="U46-jo-xjp" id="FDO-w7-RJs"/>
                     </connections>
                 </panGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="JGm-0H-DEA">
+                    <connections>
+                        <action selector="handleDoubleTapGesture:" destination="U46-jo-xjp" id="d0C-V0-rRQ"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2743" y="2088"/>
         </scene>
