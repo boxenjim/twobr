@@ -27,6 +27,17 @@ class ImageDetailViewController: UIViewController {
         imageView.transform = CGAffineTransformIdentity
     }
     
+    @IBAction func handlePinchGesture(sender: UIPinchGestureRecognizer) {
+        if sender.state == .Began {
+            preGestureTransform = imageView.transform
+        }
+        
+        if sender.state == .Began || sender.state == .Changed {
+            let scaledTransform = CGAffineTransformScale(preGestureTransform!, sender.scale, sender.scale)
+            imageView.transform = scaledTransform
+        }
+    }
+    
     var preGestureTransform: CGAffineTransform?
     var imageURL: NSURL? = nil
     

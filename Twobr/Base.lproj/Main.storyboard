@@ -119,11 +119,12 @@
                                 </variation>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="CdL-bL-kJk" appends="YES" id="kRv-Oo-nBv"/>
-                                    <outletCollection property="gestureRecognizers" destination="JGm-0H-DEA" appends="YES" id="W0T-Aw-iLf"/>
+                                    <outletCollection property="gestureRecognizers" destination="1HS-do-ix9" appends="YES" id="bnr-aI-m9R"/>
                                 </connections>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="dZE-2p-hFs" firstAttribute="top" secondItem="26k-kX-MVU" secondAttribute="topMargin" id="0kI-cD-sWS"/>
                             <constraint firstItem="gJU-vZ-CWy" firstAttribute="top" secondItem="dZE-2p-hFs" secondAttribute="bottom" id="2kk-1e-CAB"/>
@@ -144,6 +145,9 @@
                                 <exclude reference="kOf-98-06g"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="JGm-0H-DEA" appends="YES" id="Gjw-Kq-YOd"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="TuL-mf-QBX">
                         <barButtonItem key="leftBarButtonItem" systemItem="done" id="Ztu-Im-aUN">
@@ -163,9 +167,14 @@
                         <action selector="handlePanGesture:" destination="U46-jo-xjp" id="FDO-w7-RJs"/>
                     </connections>
                 </panGestureRecognizer>
+                <pinchGestureRecognizer id="1HS-do-ix9">
+                    <connections>
+                        <action selector="handlePinchGesture:" destination="U46-jo-xjp" id="2pG-TQ-tv6"/>
+                    </connections>
+                </pinchGestureRecognizer>
                 <tapGestureRecognizer numberOfTapsRequired="2" id="JGm-0H-DEA">
                     <connections>
-                        <action selector="handleDoubleTapGesture:" destination="U46-jo-xjp" id="d0C-V0-rRQ"/>
+                        <action selector="handleDoubleTapGesture:" destination="U46-jo-xjp" id="1JQ-te-lEi"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
