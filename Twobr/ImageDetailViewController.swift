@@ -11,8 +11,21 @@ import UIKit
 class ImageDetailViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
+    
+    @IBAction func handlePanGesture(sender: UIPanGestureRecognizer) {
+        if sender.state == .Began {
+            preGestureTransform = imageView.transform
+        }
+        if sender.state == .Began || sender.state == .Changed {
+            let translation = sender.translationInView(self.imageView)
+            let translatedTransform = CGAffineTransformTranslate(preGestureTransform!, translation.x, translation.y)
+            imageView.transform = translatedTransform
+        }
+    }
+    
+    var preGestureTransform: CGAffineTransform?
     var imageURL: NSURL? = nil
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

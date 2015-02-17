@@ -104,8 +104,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dZE-2p-hFs">
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dZE-2p-hFs">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="280" id="xlf-Gx-5Qv"/>
                                     <constraint firstAttribute="width" constant="280" id="xrY-Eb-SMq"/>
@@ -116,6 +117,9 @@
                                         <exclude reference="xrY-Eb-SMq"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="CdL-bL-kJk" appends="YES" id="kRv-Oo-nBv"/>
+                                </connections>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -153,6 +157,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9gc-3Q-HqI" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="yNe-Ca-GDr" userLabel="Exit" sceneMemberID="exit"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="CdL-bL-kJk">
+                    <connections>
+                        <action selector="handlePanGesture:" destination="U46-jo-xjp" id="FDO-w7-RJs"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2743" y="2088"/>
         </scene>
@@ -271,12 +280,6 @@
                                     <segue destination="58R-mZ-gNS" kind="presentation" identifier="showUserImageSegue" id="ob8-2A-irX"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Real Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjr-vS-2bt">
-                                <rect key="frame" x="84" y="72" width="500" height="21"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mnV-FZ-JSd">
                                 <rect key="frame" x="84" y="72" width="500" height="33"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -309,14 +312,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="sjr-vS-2bt" firstAttribute="top" secondItem="3oR-sg-1Wb" secondAttribute="top" id="0Uf-Ux-6v2"/>
                             <constraint firstItem="3oR-sg-1Wb" firstAttribute="top" secondItem="mnV-FZ-JSd" secondAttribute="top" id="7UH-58-buH"/>
                             <constraint firstItem="mnV-FZ-JSd" firstAttribute="leading" secondItem="3oR-sg-1Wb" secondAttribute="trailing" constant="8" id="94O-nf-PTQ"/>
                             <constraint firstItem="N8T-hA-zyF" firstAttribute="leading" secondItem="3oR-sg-1Wb" secondAttribute="trailing" constant="8" id="AIu-Rc-Kfj"/>
                             <constraint firstItem="It7-N8-bQM" firstAttribute="top" secondItem="MEK-Q6-jyS" secondAttribute="bottom" constant="8" id="HCt-dY-hFZ"/>
-                            <constraint firstItem="N8T-hA-zyF" firstAttribute="top" secondItem="sjr-vS-2bt" secondAttribute="bottom" constant="8" id="IbN-r2-myU"/>
                             <constraint firstItem="GUU-wn-x1u" firstAttribute="top" secondItem="It7-N8-bQM" secondAttribute="bottom" constant="20" id="MHw-wY-7s0"/>
-                            <constraint firstItem="sjr-vS-2bt" firstAttribute="trailing" secondItem="jbz-eX-Xnu" secondAttribute="trailingMargin" id="NfD-OJ-UL0"/>
+                            <constraint firstItem="N8T-hA-zyF" firstAttribute="top" secondItem="mnV-FZ-JSd" secondAttribute="bottom" constant="-5" id="ObP-OX-kjY"/>
                             <constraint firstItem="mnV-FZ-JSd" firstAttribute="trailing" secondItem="jbz-eX-Xnu" secondAttribute="trailingMargin" id="awg-qM-qCs"/>
                             <constraint firstItem="MEK-Q6-jyS" firstAttribute="top" secondItem="3oR-sg-1Wb" secondAttribute="bottom" constant="8" id="bap-am-qfF"/>
                             <constraint firstItem="3oR-sg-1Wb" firstAttribute="top" secondItem="gOW-mu-dQl" secondAttribute="bottom" constant="8" id="dnd-YW-oMv"/>
@@ -324,7 +325,6 @@
                             <constraint firstItem="MEK-Q6-jyS" firstAttribute="trailing" secondItem="jbz-eX-Xnu" secondAttribute="trailingMargin" id="eeO-gM-mNI"/>
                             <constraint firstItem="N8T-hA-zyF" firstAttribute="trailing" secondItem="jbz-eX-Xnu" secondAttribute="trailingMargin" id="kHk-Lg-p5n"/>
                             <constraint firstItem="3oR-sg-1Wb" firstAttribute="leading" secondItem="jbz-eX-Xnu" secondAttribute="leadingMargin" id="nH5-dv-Cnu"/>
-                            <constraint firstItem="sjr-vS-2bt" firstAttribute="leading" secondItem="3oR-sg-1Wb" secondAttribute="trailing" constant="8" id="o68-hM-a2h"/>
                             <constraint firstItem="It7-N8-bQM" firstAttribute="leading" secondItem="jbz-eX-Xnu" secondAttribute="leadingMargin" id="qe5-yA-O8n"/>
                             <constraint firstItem="MEK-Q6-jyS" firstAttribute="leading" secondItem="jbz-eX-Xnu" secondAttribute="leadingMargin" id="zFX-aq-EXj"/>
                         </constraints>
@@ -335,7 +335,6 @@
                         <outlet property="tweetTextLabel" destination="MEK-Q6-jyS" id="W5L-Dd-5mg"/>
                         <outlet property="userImageButton" destination="3oR-sg-1Wb" id="5wR-Q8-Ydb"/>
                         <outlet property="userRealNameButton" destination="mnV-FZ-JSd" id="Zx4-fE-oOK"/>
-                        <outlet property="userRealNameLabel" destination="sjr-vS-2bt" id="NxW-FN-kyI"/>
                         <outlet property="userScreenNameLabel" destination="N8T-hA-zyF" id="DCq-1p-CWJ"/>
                     </connections>
                 </viewController>

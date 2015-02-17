@@ -11,7 +11,6 @@ import UIKit
 class JobDetailsViewController: UIViewController, TwitterAPIRequestDelegate {
     @IBOutlet weak var userImageButton: UIButton!
     @IBOutlet weak var userRealNameButton: UIButton!
-    @IBOutlet weak var userRealNameLabel: UILabel!
     @IBOutlet weak var userScreenNameLabel: UILabel!
     @IBOutlet weak var tweetTextLabel: UILabel!
     @IBOutlet weak var tweetImageView: UIImageView!
@@ -39,9 +38,9 @@ class JobDetailsViewController: UIViewController, TwitterAPIRequestDelegate {
     }
     
     func handleTwitterData(data: NSData!, urlResponse: NSHTTPURLResponse!, error: NSError!, fromRequest: TwitterAPIRequest!) {
-        if let dataValue = data {
+        if data != nil {
             var parseError: NSError? = nil
-            let jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(dataValue, options: NSJSONReadingOptions(0), error: &parseError)
+            let jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(0), error: &parseError)
             if parseError != nil {
                 return
             }
@@ -50,11 +49,11 @@ class JobDetailsViewController: UIViewController, TwitterAPIRequestDelegate {
                 dispatch_async(dispatch_get_main_queue(), {
                     let userDict = tweetDict["user"] as NSDictionary
                     //self.userRealNameLabel.text = userDict["name"] as? String
-                    let userRealName = userDict["name"] as? String
-                    self.userRealNameButton.setTitle(userRealName, forState: UIControlState.Normal)
+                    //let userRealName = userDict["name"] as? String
+                    self.userRealNameButton.setTitle(userDict["name"] as? String, forState: UIControlState.Normal)
                     self.userScreenNameLabel.text = userDict["screen_name"] as? String
                     self.tweetTextLabel.text = tweetDict["text"] as? String
-                    self.userImageURL = NSURL(string: tweetDict["profile_image_url"] as NSString!)
+                    self.userImageURL = NSURL(string: userDict["profile_image_url"] as NSString!)
                     if self.userImageURL != nil {
                         if let userImageData = NSData(contentsOfURL: self.userImageURL!) {
                             self.userImageButton.setImage(UIImage(data: userImageData), forState: UIControlState.Normal)
