@@ -27,19 +27,19 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRJ-xg-N4d">
-                                            <rect key="frame" x="66" y="8" width="426" height="21"/>
+                                            <rect key="frame" x="66" y="8" width="476" height="20.5"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exr-PB-fia">
-                                            <rect key="frame" x="66" y="37" width="526" height="17"/>
+                                            <rect key="frame" x="66" y="36.5" width="526" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ioK-Xk-mQg">
-                                            <rect key="frame" x="563" y="12" width="29" height="14"/>
+                                            <rect key="frame" x="563.5" y="12" width="28.5" height="13.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -54,10 +54,10 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="ioK-Xk-mQg" secondAttribute="bottom" id="XgK-NP-8G4"/>
                                         <constraint firstAttribute="centerX" secondItem="ioK-Xk-mQg" secondAttribute="centerX" id="Xyg-Hp-fYf"/>
                                         <constraint firstItem="tRJ-xg-N4d" firstAttribute="top" secondItem="GmU-H8-pAY" secondAttribute="topMargin" id="boD-LJ-E8n"/>
-                                        <constraint firstItem="ioK-Xk-mQg" firstAttribute="centerY" secondItem="tRJ-xg-N4d" secondAttribute="centerY" constant="0.5" id="gks-4T-WhU"/>
+                                        <constraint firstItem="ioK-Xk-mQg" firstAttribute="centerY" secondItem="tRJ-xg-N4d" secondAttribute="centerY" id="gks-4T-WhU"/>
                                         <constraint firstItem="ioK-Xk-mQg" firstAttribute="trailing" secondItem="GmU-H8-pAY" secondAttribute="trailingMargin" id="nhL-cC-Icn"/>
                                         <constraint firstItem="exr-PB-fia" firstAttribute="leading" secondItem="d9h-DM-Cn1" secondAttribute="trailing" constant="8" id="qeO-7C-Ydp"/>
-                                        <constraint firstItem="tRJ-xg-N4d" firstAttribute="trailing" secondItem="GmU-H8-pAY" secondAttribute="trailingMargin" constant="-100" id="tKr-fW-r7V"/>
+                                        <constraint firstItem="tRJ-xg-N4d" firstAttribute="trailing" secondItem="GmU-H8-pAY" secondAttribute="trailingMargin" constant="-50" id="tKr-fW-r7V"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -71,6 +71,7 @@
                                     <outlet property="createdAtLabel" destination="ioK-Xk-mQg" id="sNz-Su-wq6"/>
                                     <outlet property="tweetTextLabel" destination="exr-PB-fia" id="dOO-ZO-tyZ"/>
                                     <outlet property="userNameLabel" destination="tRJ-xg-N4d" id="Jb8-50-NCf"/>
+                                    <segue destination="dR3-gN-GLx" kind="showDetail" identifier="showJobDetailsSegue" id="7OU-cF-u2q"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -435,6 +436,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="7OU-cF-u2q"/>
         <segue reference="ob8-2A-irX"/>
     </inferredMetricsTieBreakers>
 </document>
