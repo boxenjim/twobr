@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Jobs-->
+        <!--Twobr-->
         <scene sceneID="zfn-dh-53d">
             <objects>
                 <tableViewController storyboardIdentifier="JobsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="q4f-ic-PG7" customClass="JobsViewController" customModule="Twobr" customModuleProvider="target" sceneMemberID="viewController">
@@ -71,7 +71,6 @@
                                     <outlet property="createdAtLabel" destination="ioK-Xk-mQg" id="sNz-Su-wq6"/>
                                     <outlet property="tweetTextLabel" destination="exr-PB-fia" id="dOO-ZO-tyZ"/>
                                     <outlet property="userNameLabel" destination="tRJ-xg-N4d" id="Jb8-50-NCf"/>
-                                    <segue destination="dR3-gN-GLx" kind="showDetail" identifier="showJobDetailsSegue" id="O91-tN-Yr3"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -80,17 +79,21 @@
                             <outlet property="delegate" destination="q4f-ic-PG7" id="4ij-77-LvK"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Jobs" id="bQL-jt-Q5a">
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="uzn-QU-i15"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Twobr" id="bQL-jt-Q5a">
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="CqB-8P-dcZ">
                             <connections>
                                 <action selector="handleTweetButtonTapped:" destination="q4f-ic-PG7" id="HgG-TL-aPG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HXD-Wn-AxH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1531" y="451"/>
+            <point key="canvasLocation" x="1531" y="405"/>
         </scene>
         <!--Image Detail View Controller-->
         <scene sceneID="sW2-Ge-4zW">
@@ -367,8 +370,8 @@
             <objects>
                 <splitViewController storyboardIdentifier="SplitViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="juc-2t-OFq" customClass="SplitViewController" customModule="Twobr" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
-                        <segue destination="yfq-HT-hfw" kind="relationship" relationship="masterViewController" id="Cyz-jy-xVi"/>
                         <segue destination="dR3-gN-GLx" kind="relationship" relationship="detailViewController" id="7uk-r5-1cK"/>
+                        <segue destination="yfq-HT-hfw" kind="relationship" relationship="masterViewController" id="b2q-3e-AgT"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Qt-RH-zNl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -379,6 +382,7 @@
         <scene sceneID="3Fj-rM-dw5">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yfq-HT-hfw" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="recents" id="uCW-Sh-NN6"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8jA-xg-mqb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -391,7 +395,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="32b-kl-cqJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="719" y="451"/>
+            <point key="canvasLocation" x="719" y="405"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Mff-xY-1ea">
@@ -431,7 +435,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="O91-tN-Yr3"/>
         <segue reference="ob8-2A-irX"/>
     </inferredMetricsTieBreakers>
 </document>
