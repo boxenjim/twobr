@@ -8,6 +8,7 @@
 
 import UIKit
 import Swifties
+import CoreData
 
 class TwobrDataModel: BasicDataModel {
     class var sharedStore: TwobrDataModel {
@@ -15,5 +16,25 @@ class TwobrDataModel: BasicDataModel {
             static let instance = TwobrDataModel()
         }
         return Singleton.instance
+    }
+    
+    func findJob(jobID: String) -> Job? {
+        let fetchRequest = NSFetchRequest()
+        fetchRequest.entity = NSEntityDescription.entityForName("Job", inManagedObjectContext: self.managedObjectContext!)
+        fetchRequest.predicate = NSPredicate(format: "id_str MATCHES %@", jobID)
+        
+        var error: NSError? = nil
+        let array = managedObjectContext?.executeFetchRequest(fetchRequest, error: &error)
+        return array?.last as? Job
+    }
+    
+    func findUser(userID: String) -> User? {
+        let fetchRequest = NSFetchRequest()
+        fetchRequest.entity = NSEntityDescription.entityForName("User", inManagedObjectContext: self.managedObjectContext!)
+        fetchRequest.predicate = NSPredicate(format: "id_str MATCHES %@", userID)
+        
+        var error: NSError? = nil
+        let array = managedObjectContext?.executeFetchRequest(fetchRequest, error: &error)
+        return array?.last as? User
     }
 }

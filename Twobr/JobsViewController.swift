@@ -68,7 +68,8 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
     func parseFeedRequestResponse(jsonArray: [[String:AnyObject]]) {
         var tempArray: [ParsedTweet] = []
         for tweetDict in jsonArray {
-            //println("tweet: \(tweetDict)")
+//            let user: AnyObject? = tweetDict["user"]
+//            println("user: \(user)")
             //let keywords = ["open", "available", "fill", "work", "job", "hire", "hiring", "career", "look", "need", "position", "search", "find", "help", "grow", "join", "apply", "application", "full-time", "part-time", "full time", "part time", "contractor", "freelance"]
             let keywords = ["job", "career", "hire", "hiring", "find", "looking", "part-time", "full-time", "freelance", "part time", "full time", "position", "twobr", "post", "interview"]
             
