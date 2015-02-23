@@ -23,18 +23,28 @@ class User: NSManagedObject {
         return NSEntityDescription.insertNewObjectForEntityForName("User", inManagedObjectContext: TwobrDataModel.sharedStore.managedObjectContext!) as User
     }
     
-//    class func user(params: [String:AnyObject]) -> User {
-//        var user = User()
-//        user.update(params)
-//        return user
-//    }
-    
-    class func user(params: [String:AnyObject], job: Job) -> User {
+    class func user(params: [String:AnyObject]) -> User {
+        if let usr = TwobrDataModel.sharedStore.findUser(params["id_str"] as String) as User? {
+            usr.update(params)
+            return usr
+        }
+        
         var user = User()
-        user.job = job
         user.update(params)
         return user
     }
+    
+//    class func user(params: [String:AnyObject], job: Job) -> User {
+//        if let usr = TwobrDataModel.sharedStore.findUser(params["id_str"] as String) as User? {
+//            
+//        } else {
+//            
+//        }
+//        var user = User()
+//        user.job = job
+//        user.update(params)
+//        return user
+//    }
     
     func update(params: Dictionary<String, AnyObject>) {
         for key in params.keys {

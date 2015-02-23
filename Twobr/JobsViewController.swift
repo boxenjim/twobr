@@ -41,10 +41,9 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
         
         if feedRequest == nil && searchRequest == nil {
             feedRequest = TwitterAPIRequest()
-            searchRequest = TwitterAPIRequest()
             
             // get home timeline
-            var feedParams = ["count":"20"]
+            var feedParams = ["count":"200"]
             if self.feedSinceID != nil {
                 feedParams["since_id"] = self.feedSinceID
             }
@@ -55,6 +54,7 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
     }
     
     func searchForJobs() {
+        searchRequest = TwitterAPIRequest()
         // get search results
         var searchParams = ["count":"20", "q":"job, hire, hiring"]
         if self.searchSinceID != nil {
@@ -71,41 +71,71 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
 //            let user: AnyObject? = tweetDict["user"]
 //            println("user: \(user)")
             //let keywords = ["open", "available", "fill", "work", "job", "hire", "hiring", "career", "look", "need", "position", "search", "find", "help", "grow", "join", "apply", "application", "full-time", "part-time", "full time", "part time", "contractor", "freelance"]
-            let keywords = ["job", "career", "hire", "hiring", "find", "looking", "part-time", "full-time", "freelance", "part time", "full time", "position", "twobr", "post", "interview"]
+            let primaryKeywords = ["hire", "hiring"]
+            let secondaryKeywords = ["job", "career", "find", "looking", "part-time", "full-time", "freelance", "part time", "full time", "position", "twobr", "post", "build"]
             
             var score = 0
             let scoreToBeat = 1
-            if let text = tweetDict["text"] as? String {
-                for keyword in keywords {
+            if let text = tweetDict["text"] as? NSString {
+                for keyword in primaryKeywords {
                     if text.lowercaseString.rangeOfString(keyword) != nil {
-                        score += 1
+                        score += 2
                     }
                     if score > scoreToBeat { break }
                 }
+                
+                if score < scoreToBeat {
+                    for keyword in secondaryKeywords {
+                        if text.lowercaseString.rangeOfString(keyword) != nil {
+                            score += 1
+                        }
+                        if score > scoreToBeat { break }
+                    }
+                }
             }
             
-            if let retweetedStatus = tweetDict["retweeted_status"] as? [String:AnyObject] {
-                if let entities = retweetedStatus["entities"] as? [String:AnyObject] {
-                    if let hashtags = entities["hashtags"] as? [[String:AnyObject]] {
-                        for hashtag in hashtags {
-                            if let text = hashtag["text"] as? String {
-                                for keyword in keywords {
-                                    if text.lowercaseString.rangeOfString(keyword) != nil {
-                                        score += 1
+            if score < scoreToBeat {
+                if let retweetedStatus = tweetDict["retweeted_status"] as? NSDictionary {
+                    if let entities = retweetedStatus["entities"] as? NSDictionary {
+                        if let hashtags = entities["hashtags"] as? NSArray {
+                            for hashtag in hashtags {
+                                if let text = hashtag["text"] as? NSString {
+                                    for keyword in primaryKeywords {
+                                        if text.lowercaseString.rangeOfString(keyword) != nil {
+                                            score += 2
+                                        }
+                                        if score > scoreToBeat { break }
                                     }
-                                    if score > scoreToBeat { break }
+                                    
+                                    if score < scoreToBeat {
+                                        for keyword in secondaryKeywords {
+                                            if text.lowercaseString.rangeOfString(keyword) != nil {
+                                                score += 1
+                                            }
+                                            if score > scoreToBeat { break }
+                                        }
+                                    }
                                 }
                             }
                         }
-                    }
-                    if let urls = entities["urls"] as? [[String:AnyObject]] {
-                        for urlDict in urls {
-                            if let url = urlDict["display_url"] as? String {
-                                for keyword in keywords {
-                                    if url.lowercaseString.rangeOfString(keyword) != nil {
-                                        score += 1
+                        if let urls = entities["urls"] as? NSArray {
+                            for urlDict in urls {
+                                if let url = urlDict["display_url"] as? NSString {
+                                    for keyword in primaryKeywords {
+                                        if url.lowercaseString.rangeOfString(keyword) != nil {
+                                            score += 2
+                                        }
+                                        if score > scoreToBeat { break }
                                     }
-                                    if score > scoreToBeat { break }
+                                    
+                                    if score < scoreToBeat {
+                                        for keyword in secondaryKeywords {
+                                            if url.lowercaseString.rangeOfString(keyword) != nil {
+                                                score += 1
+                                            }
+                                            if score > scoreToBeat { break }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -116,17 +146,17 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
             if score > scoreToBeat {
             //if score >= 0 {
                 let parsedTweet = ParsedTweet()
-                parsedTweet.tweetIdString = tweetDict["id_str"] as? String
-                parsedTweet.tweetText = tweetDict["text"] as? String
-                parsedTweet.createdAt = tweetDict["created_at"] as? String
+                parsedTweet.tweetIdString = tweetDict["id_str"] as? NSString
+                parsedTweet.tweetText = tweetDict["text"] as? NSString
+                parsedTweet.createdAt = tweetDict["created_at"] as? NSString
                 let userDict = tweetDict["user"] as NSDictionary
-                parsedTweet.userName = userDict["name"] as? String
-                parsedTweet.userAvatarURL = NSURL(string: userDict["profile_image_url"] as String!)
+                parsedTweet.userName = userDict["name"] as? NSString
+                parsedTweet.userAvatarURL = NSURL(string: userDict["profile_image_url"] as NSString!)
                 tempArray.append(parsedTweet)
             }
         }
         if tempArray.count > 0 {
-            self.feedSinceID = jsonArray[0]["id_str"] as? String
+            self.feedSinceID = jsonArray[0]["id_str"] as? NSString
             self.jobsArray[0..<0] = tempArray[0..<tempArray.count]
         } else {
             self.searchForJobs()
@@ -142,20 +172,20 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
         })
     }
     
-    func parseSearchRequestResponse(jsonArray: [[String:AnyObject]]) {
+    func parseSearchRequestResponse(jsonArray: NSArray) {
         var tempArray: [ParsedTweet] = []
         for tweetDict in jsonArray {
             let parsedTweet = ParsedTweet()
-            parsedTweet.tweetIdString = tweetDict["id_str"] as? String
-            parsedTweet.tweetText = tweetDict["text"] as? String
-            parsedTweet.createdAt = tweetDict["created_at"] as? String
+            parsedTweet.tweetIdString = tweetDict["id_str"] as? NSString
+            parsedTweet.tweetText = tweetDict["text"] as? NSString
+            parsedTweet.createdAt = tweetDict["created_at"] as? NSString
             let userDict = tweetDict["user"] as NSDictionary
-            parsedTweet.userName = userDict["name"] as? String
-            parsedTweet.userAvatarURL = NSURL(string: userDict["profile_image_url"] as String!)
+            parsedTweet.userName = userDict["name"] as? NSString
+            parsedTweet.userAvatarURL = NSURL(string: userDict["profile_image_url"] as NSString!)
             tempArray.append(parsedTweet)
         }
         if tempArray.count > 0 {
-            self.searchSinceID = jsonArray[0]["id_str"] as? String
+            self.searchSinceID = jsonArray[0]["id_str"] as? NSString
             self.jobsArray[0..<0] = tempArray[0..<tempArray.count]
         }
         

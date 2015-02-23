@@ -19,8 +19,7 @@ class TwobrDataModel: BasicDataModel {
     }
     
     func findJob(jobID: String) -> Job? {
-        let fetchRequest = NSFetchRequest()
-        fetchRequest.entity = NSEntityDescription.entityForName("Job", inManagedObjectContext: self.managedObjectContext!)
+        let fetchRequest = NSFetchRequest(entityName: "Job")
         fetchRequest.predicate = NSPredicate(format: "id_str MATCHES %@", jobID)
         
         var error: NSError? = nil
@@ -29,8 +28,7 @@ class TwobrDataModel: BasicDataModel {
     }
     
     func findUser(userID: String) -> User? {
-        let fetchRequest = NSFetchRequest()
-        fetchRequest.entity = NSEntityDescription.entityForName("User", inManagedObjectContext: self.managedObjectContext!)
+        let fetchRequest = NSFetchRequest(entityName: "User")
         fetchRequest.predicate = NSPredicate(format: "id_str MATCHES %@", userID)
         
         var error: NSError? = nil
