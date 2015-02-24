@@ -9,6 +9,7 @@
 import UIKit
 import Social
 import Accounts
+import Swifties
 
 let defaultAvatarURL = NSURL(string: "https://abs.twimg.com/sticky/default_profile_images/default_profile_6_200x200.png")
 
@@ -22,6 +23,8 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
     var feedSinceID: String? = nil
     var searchSinceID: String? = nil
     var jobsArray: [ParsedTweet] = []
+    
+    var searchRegex: String = "(?:\\S+\\slooking|looking\\sfor|hiring\\sa?|hire\\s\\S+|\\S+\\shire)"
     
     @IBAction func handleTweetButtonTapped(sender: AnyObject) {
         if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter) {
@@ -65,94 +68,105 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
         searchRequest!.sendTwitterRequest(searchAPIURL, params: searchParams, delegate: self)
     }
     
+    func regexCheckForMatch(text: NSString) -> Bool {
+        var error: NSError?
+        var regex = NSRegularExpression(pattern: searchRegex, options: .CaseInsensitive, error: &error)
+        
+        let matches = regex?.matchesInString(text, options: .allZeros, range: NSMakeRange(0, text.length))
+        return matches?.count > 0
+    }
+    
     func parseFeedRequestResponse(jsonArray: [[String:AnyObject]]) {
         var tempArray: [ParsedTweet] = []
         for tweetDict in jsonArray {
 //            let user: AnyObject? = tweetDict["user"]
 //            println("user: \(user)")
             //let keywords = ["open", "available", "fill", "work", "job", "hire", "hiring", "career", "look", "need", "position", "search", "find", "help", "grow", "join", "apply", "application", "full-time", "part-time", "full time", "part time", "contractor", "freelance"]
-            let primaryKeywords = ["hire", "hiring"]
-            let secondaryKeywords = ["job", "career", "find", "looking", "part-time", "full-time", "freelance", "part time", "full time", "position", "twobr", "post", "build"]
             
-            var score = 0
-            let scoreToBeat = 1
+//            let primaryKeywords = ["hire", "hiring"]
+//            let secondaryKeywords = ["job", "career", "find", "looking", "part-time", "full-time", "freelance", "part time", "full time", "position", "twobr", "post", "build"]
+//            
+//            var score = 0
+//            let scoreToBeat = 1
+//            if let text = tweetDict["text"] as? NSString {
+//                for keyword in primaryKeywords {
+//                    if text.lowercaseString.rangeOfString(keyword) != nil {
+//                        score += 2
+//                    }
+//                    if score > scoreToBeat { break }
+//                }
+//                
+//                if score < scoreToBeat {
+//                    for keyword in secondaryKeywords {
+//                        if text.lowercaseString.rangeOfString(keyword) != nil {
+//                            score += 1
+//                        }
+//                        if score > scoreToBeat { break }
+//                    }
+//                }
+//            }
+//            
+//            if score < scoreToBeat {
+//                if let retweetedStatus = tweetDict["retweeted_status"] as? NSDictionary {
+//                    if let entities = retweetedStatus["entities"] as? NSDictionary {
+//                        if let hashtags = entities["hashtags"] as? NSArray {
+//                            for hashtag in hashtags {
+//                                if let text = hashtag["text"] as? NSString {
+//                                    for keyword in primaryKeywords {
+//                                        if text.lowercaseString.rangeOfString(keyword) != nil {
+//                                            score += 2
+//                                        }
+//                                        if score > scoreToBeat { break }
+//                                    }
+//                                    
+//                                    if score < scoreToBeat {
+//                                        for keyword in secondaryKeywords {
+//                                            if text.lowercaseString.rangeOfString(keyword) != nil {
+//                                                score += 1
+//                                            }
+//                                            if score > scoreToBeat { break }
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if let urls = entities["urls"] as? NSArray {
+//                            for urlDict in urls {
+//                                if let url = urlDict["display_url"] as? NSString {
+//                                    for keyword in primaryKeywords {
+//                                        if url.lowercaseString.rangeOfString(keyword) != nil {
+//                                            score += 2
+//                                        }
+//                                        if score > scoreToBeat { break }
+//                                    }
+//                                    
+//                                    if score < scoreToBeat {
+//                                        for keyword in secondaryKeywords {
+//                                            if url.lowercaseString.rangeOfString(keyword) != nil {
+//                                                score += 1
+//                                            }
+//                                            if score > scoreToBeat { break }
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+            
+            //if score > scoreToBeat {
             if let text = tweetDict["text"] as? NSString {
-                for keyword in primaryKeywords {
-                    if text.lowercaseString.rangeOfString(keyword) != nil {
-                        score += 2
-                    }
-                    if score > scoreToBeat { break }
+                if self.regexCheckForMatch(text) {
+                    let parsedTweet = ParsedTweet()
+                    parsedTweet.tweetIdString = tweetDict["id_str"] as? NSString
+                    parsedTweet.tweetText = tweetDict["text"] as? NSString
+                    parsedTweet.createdAt = tweetDict["created_at"] as? NSString
+                    let userDict = tweetDict["user"] as NSDictionary
+                    parsedTweet.userName = userDict["name"] as? NSString
+                    parsedTweet.userAvatarURL = NSURL(string: userDict["profile_image_url"] as NSString!)
+                    tempArray.append(parsedTweet)
                 }
-                
-                if score < scoreToBeat {
-                    for keyword in secondaryKeywords {
-                        if text.lowercaseString.rangeOfString(keyword) != nil {
-                            score += 1
-                        }
-                        if score > scoreToBeat { break }
-                    }
-                }
-            }
-            
-            if score < scoreToBeat {
-                if let retweetedStatus = tweetDict["retweeted_status"] as? NSDictionary {
-                    if let entities = retweetedStatus["entities"] as? NSDictionary {
-                        if let hashtags = entities["hashtags"] as? NSArray {
-                            for hashtag in hashtags {
-                                if let text = hashtag["text"] as? NSString {
-                                    for keyword in primaryKeywords {
-                                        if text.lowercaseString.rangeOfString(keyword) != nil {
-                                            score += 2
-                                        }
-                                        if score > scoreToBeat { break }
-                                    }
-                                    
-                                    if score < scoreToBeat {
-                                        for keyword in secondaryKeywords {
-                                            if text.lowercaseString.rangeOfString(keyword) != nil {
-                                                score += 1
-                                            }
-                                            if score > scoreToBeat { break }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        if let urls = entities["urls"] as? NSArray {
-                            for urlDict in urls {
-                                if let url = urlDict["display_url"] as? NSString {
-                                    for keyword in primaryKeywords {
-                                        if url.lowercaseString.rangeOfString(keyword) != nil {
-                                            score += 2
-                                        }
-                                        if score > scoreToBeat { break }
-                                    }
-                                    
-                                    if score < scoreToBeat {
-                                        for keyword in secondaryKeywords {
-                                            if url.lowercaseString.rangeOfString(keyword) != nil {
-                                                score += 1
-                                            }
-                                            if score > scoreToBeat { break }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            
-            if score > scoreToBeat {
-            //if score >= 0 {
-                let parsedTweet = ParsedTweet()
-                parsedTweet.tweetIdString = tweetDict["id_str"] as? NSString
-                parsedTweet.tweetText = tweetDict["text"] as? NSString
-                parsedTweet.createdAt = tweetDict["created_at"] as? NSString
-                let userDict = tweetDict["user"] as NSDictionary
-                parsedTweet.userName = userDict["name"] as? NSString
-                parsedTweet.userAvatarURL = NSURL(string: userDict["profile_image_url"] as NSString!)
-                tempArray.append(parsedTweet)
             }
         }
         if tempArray.count > 0 {
@@ -230,6 +244,23 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
         }
     }
     
+    func retrieveRegex(success: Void -> Void, failure: Void -> Void) {
+        let url = NSURL(string: "https://dl.dropboxusercontent.com/u/7188432/regex.html")
+        let request = NSURLRequest(URL: url!)
+        let session = NSURLSession(configuration: .defaultSessionConfiguration())
+        let task = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+            let html = NSString(data: data, encoding: NSUTF8StringEncoding)
+            if let reg = html?.substringBetween("<html>", otherString: "</html>") {
+                self.searchRegex = reg
+                success()
+            } else {
+                failure()
+            }
+            self.reloadTweets()
+        })
+        task.resume()
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
@@ -248,7 +279,8 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
             self.jobDetailsVC = controllers[controllers.count-1].topViewController as? JobDetailsViewController
         }
         
-        reloadTweets()
+        retrieveRegex({}, failure: {})
+        
         var refresher = UIRefreshControl()
         refresher.addTarget(self, action: "handleRefresh:", forControlEvents: UIControlEvents.ValueChanged)
         refreshControl = refresher

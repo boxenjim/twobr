@@ -27,6 +27,15 @@
 		9BE640451A8AAF13001D121F /* JobDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE640441A8AAF13001D121F /* JobDetailsViewController.swift */; };
 		9BEAEC0C1A97DF8F007D94AC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEAEC0B1A97DF8F007D94AC /* User.swift */; };
 		9BEAEC0E1A97DF8F007D94AC /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BEAEC0D1A97DF8F007D94AC /* Job.swift */; };
+		9BF960E01A9BE24500136C33 /* RegexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF960DF1A9BE24500136C33 /* RegexTests.swift */; };
+		9BF960E31A9BE25D00136C33 /* JobsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B82080B1A894DF8007B1B80 /* JobsViewController.swift */; };
+		9BF960E41A9BE2AC00136C33 /* TwitterAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE640401A8AA494001D121F /* TwitterAPIRequest.swift */; };
+		9BF960E51A9BE2AF00136C33 /* TwitterAPIRequestDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE640421A8AA4F5001D121F /* TwitterAPIRequestDelegate.swift */; };
+		9BF960E61A9BE2BC00136C33 /* JobDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE640441A8AAF13001D121F /* JobDetailsViewController.swift */; };
+		9BF960E71A9BE2CA00136C33 /* ParsedTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8208381A896E42007B1B80 /* ParsedTweet.swift */; };
+		9BF960E81A9BE2E000136C33 /* ParsedTweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B158AAF1A89748100EC1350 /* ParsedTweetCell.swift */; };
+		9BF960E91A9BE2E500136C33 /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B14BF411A8AF8F000B9132B /* UserDetailViewController.swift */; };
+		9BF960EA1A9BE2E800136C33 /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB18AF31A8D1BE200FFD8FD /* ImageDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +103,7 @@
 		9BE640441A8AAF13001D121F /* JobDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobDetailsViewController.swift; sourceTree = "<group>"; };
 		9BEAEC0B1A97DF8F007D94AC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9BEAEC0D1A97DF8F007D94AC /* Job.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
+		9BF960DF1A9BE24500136C33 /* RegexTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				9B82081E1A894DF8007B1B80 /* Info.plist */,
+				9BF960DF1A9BE24500136C33 /* RegexTests.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -372,6 +383,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BF960E71A9BE2CA00136C33 /* ParsedTweet.swift in Sources */,
+				9BF960E31A9BE25D00136C33 /* JobsViewController.swift in Sources */,
+				9BF960E91A9BE2E500136C33 /* UserDetailViewController.swift in Sources */,
+				9BF960E81A9BE2E000136C33 /* ParsedTweetCell.swift in Sources */,
+				9BF960E01A9BE24500136C33 /* RegexTests.swift in Sources */,
+				9BF960E41A9BE2AC00136C33 /* TwitterAPIRequest.swift in Sources */,
+				9BF960E51A9BE2AF00136C33 /* TwitterAPIRequestDelegate.swift in Sources */,
+				9BF960EA1A9BE2E800136C33 /* ImageDetailViewController.swift in Sources */,
+				9BF960E61A9BE2BC00136C33 /* JobDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,6 +546,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -537,6 +558,7 @@
 				INFOPLIST_FILE = TwobrTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Twobr.app/Twobr";
 			};
 			name = Debug;
@@ -545,6 +567,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
