@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="juc-2t-OFq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="juc-2t-OFq">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -9,12 +9,12 @@
         <scene sceneID="zfn-dh-53d">
             <objects>
                 <tableViewController storyboardIdentifier="JobsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="q4f-ic-PG7" customClass="JobsViewController" customModule="Twobr" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="110" sectionHeaderHeight="22" sectionFooterHeight="22" id="OfM-JZ-d6P">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OfM-JZ-d6P">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ParsedTweetCell" rowHeight="110" id="kWD-EH-jW8" customClass="ParsedTweetCell" customModule="Twobr" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ParsedTweetCell" rowHeight="66" id="kWD-EH-jW8" customClass="ParsedTweetCell" customModule="Twobr" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kWD-EH-jW8" id="GmU-H8-pAY">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -32,15 +32,15 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exr-PB-fia">
-                                            <rect key="frame" x="66" y="36" width="526" height="17"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ioK-Xk-mQg">
                                             <rect key="frame" x="563" y="12" width="28.5" height="13.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exr-PB-fia">
+                                            <rect key="frame" x="66" y="28.5" width="526" height="28.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -48,6 +48,7 @@
                                     <constraints>
                                         <constraint firstItem="exr-PB-fia" firstAttribute="trailing" secondItem="GmU-H8-pAY" secondAttribute="trailingMargin" id="3VC-PP-yif"/>
                                         <constraint firstItem="d9h-DM-Cn1" firstAttribute="leading" secondItem="GmU-H8-pAY" secondAttribute="leadingMargin" id="FpP-Sr-Ytb"/>
+                                        <constraint firstItem="exr-PB-fia" firstAttribute="top" secondItem="tRJ-xg-N4d" secondAttribute="bottom" id="I23-IS-DJU"/>
                                         <constraint firstItem="exr-PB-fia" firstAttribute="top" secondItem="tRJ-xg-N4d" secondAttribute="bottom" constant="8" id="Ipx-d6-fuG"/>
                                         <constraint firstItem="d9h-DM-Cn1" firstAttribute="top" secondItem="GmU-H8-pAY" secondAttribute="topMargin" id="M5j-n6-Fix"/>
                                         <constraint firstItem="tRJ-xg-N4d" firstAttribute="leading" secondItem="d9h-DM-Cn1" secondAttribute="trailing" constant="8" id="OHQ-0n-RIp"/>
@@ -56,11 +57,15 @@
                                         <constraint firstItem="tRJ-xg-N4d" firstAttribute="top" secondItem="GmU-H8-pAY" secondAttribute="topMargin" id="boD-LJ-E8n"/>
                                         <constraint firstItem="ioK-Xk-mQg" firstAttribute="centerY" secondItem="tRJ-xg-N4d" secondAttribute="centerY" id="gks-4T-WhU"/>
                                         <constraint firstItem="ioK-Xk-mQg" firstAttribute="trailing" secondItem="GmU-H8-pAY" secondAttribute="trailingMargin" id="nhL-cC-Icn"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="exr-PB-fia" secondAttribute="bottom" id="ppo-Of-XFq"/>
                                         <constraint firstItem="exr-PB-fia" firstAttribute="leading" secondItem="d9h-DM-Cn1" secondAttribute="trailing" constant="8" id="qeO-7C-Ydp"/>
                                         <constraint firstItem="tRJ-xg-N4d" firstAttribute="trailing" secondItem="GmU-H8-pAY" secondAttribute="trailingMargin" constant="-50" id="tKr-fW-r7V"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="exr-PB-fia" secondAttribute="bottom" id="xxv-Qw-p1K"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
+                                            <exclude reference="Ipx-d6-fuG"/>
+                                            <exclude reference="xxv-Qw-p1K"/>
                                             <exclude reference="XgK-NP-8G4"/>
                                             <exclude reference="Xyg-Hp-fYf"/>
                                         </mask>

@@ -272,11 +272,11 @@ class JobsViewController: UITableViewController, TwitterAPIRequestDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.leftBarButtonItem = editButtonItem()
+        navigationItem.leftBarButtonItem = editButtonItem()
         
         if let split = self.splitViewController {
             let controllers = split.viewControllers
-            self.jobDetailsVC = controllers[controllers.count-1].topViewController as? JobDetailsViewController
+            jobDetailsVC = controllers[controllers.count-1].topViewController as? JobDetailsViewController
         }
         
         retrieveRegex({}, failure: {})
